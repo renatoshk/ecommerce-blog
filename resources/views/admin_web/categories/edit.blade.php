@@ -1,0 +1,49 @@
+@extends('layouts.index')
+@section('content')
+<div class="content-wrapper" style="min-height: 1200.88px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Edit Categories</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Categories</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-12">
+              <a href="{{route('categories.create')}}" class="btn btn-success" style="float: right;">Add Category</a>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+<br>
+<br>
+<!-- editimi e categories -->
+<div class="col-sm-6">
+{!!Form::model($category, ['method'=>'PATCH', 'action'=>['AdminCategoriesController@update', $category->id]]) !!}
+<div class="form-group">
+     {!!Form::text('name', null, ['class'=>'form-control'])!!}
+</div>
+<div class="form-group">
+	{!!Form::submit('Update Category ', ['class'=>'btn btn-primary col-sm-6'])!!}
+</div>
+{!!Form::close()!!}
+<!-- end editimi e categories -->
+
+  <!-- /.content -->
+</div>
+</div>
+
+@stop
