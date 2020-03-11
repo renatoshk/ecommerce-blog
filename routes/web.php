@@ -74,6 +74,7 @@ Route::resource('/adm/posts', 'AdminPostsController');
 Route::resource('/adm/categories', 'AdminCategoriesController');
 Route::resource('/adm/comments', 'PostsCommentController');
 Route::resource('/adm/comments/replies', 'CommentRepliesController');
+Route::resource('/adm/currencies', 'AdminCurrencyController');
 
 // Route::get('/adm', function(){
 //        return view('admin_web.index');

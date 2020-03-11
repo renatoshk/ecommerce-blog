@@ -1,0 +1,11 @@
+id
+currency name
+currency code
+currency symbol
+currency flag
+is base currency
+currency rate
+
+
+1. when adding new currency
+2. when changing base currency
