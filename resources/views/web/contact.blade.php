@@ -1,4 +1,4 @@
-@extends('layouts.blog-home')
+@extends('layouts.webi.index')
 @section ('content')
  <!-- offer block Start  -->
   <div id="offer">

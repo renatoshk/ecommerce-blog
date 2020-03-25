@@ -1,4 +1,4 @@
-@extends('layouts.index')
+@extends('layouts.admin.index')
 @section('content')
 <div class="content-wrapper" style="min-height: 1200.88px;">
     <!-- Content Header (Page header) -->
@@ -44,10 +44,10 @@
   <div class="form-group">
     {!!Form::label('currency_symbol', 'Currency Symbol:')!!}
     {!!Form::text('currency_symbol',null, ['class'=>'form-control'] )!!}
+</div>
   <div class="form-group">
     {!!Form::submit('Update Currency', ['class'=>'btn btn-primary'])!!}
   </div>
-</div>
 </div>
 {!!Form::close()!!}
 <!-- end editimi e categories -->

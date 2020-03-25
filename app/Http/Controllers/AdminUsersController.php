@@ -98,14 +98,7 @@ class AdminUsersController extends Controller
     {
         $user = User::findOrFail($id);
         //
-       if(trim($request->password == '')){
-          
-          return redirect()->back();
-       }  
-       else {
-           $input = $request->all();
-           $input['password'] =bcrypt($request->password);
-       }
+       $input = $request->all();
        if($file = $request->file('photo_id')){
           $name = time() . $file->getClientOriginalName();
           $file->move('images', $name);

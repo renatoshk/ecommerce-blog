@@ -27,13 +27,13 @@ Route::get('/list-view', function(){
       return view('web.list-view');
 }); 
 Route::get('/grid-view', function(){
-      return view('web.list-view');
+      return view('web.grid-view');
 });
 Route::get('/contact', function(){
-      return view('web.list-view');
+      return view('web.contact');
 });
 Route::get('/checkout', function(){
-      return view('web.list-view');
+      return view('web.checkout');
 });
 Route::get('/checkout-step-1', function(){
       return view('web.checkout-step-1');
@@ -62,7 +62,8 @@ Route::get('/error', function(){
 
 //admin frontend group routes
 
-Route::get('/adm', 'AdminController@index');
+Route::group(['middleware'=>'admin'], function(){
+Route::get('/adm ', 'AdminController@index');
 Route::resource('/adm/users', 'AdminUsersController');
 Route::resource('/adm/users_checkout', 'AdminUsersCheckoutController');
 Route::resource('/adm/products', 'AdminProductController');
@@ -75,16 +76,18 @@ Route::resource('/adm/categories', 'AdminCategoriesController');
 Route::resource('/adm/comments', 'PostsCommentController');
 Route::resource('/adm/comments/replies', 'CommentRepliesController');
 Route::resource('/adm/currencies', 'AdminCurrencyController');
+Route::patch('adm/basecurrency/{id}', 'AdminCurrencyController@basecurrency');
+});
 
-// Route::get('/adm', function(){
-//        return view('admin_web.index');
-// });
-// Route::get('/adm/card', function(){
-//        return view('admin_web.cards');
-// });
-// Route::get('/adm/blank', function(){
-//        return view('admin_web.blank');
-// });
+Auth::routes();
+Route::resource('/profile', 'ProfileController');
+Route::resource('/change_password', 'ChangePasswordUsersController');
+Route::resource('/', 'CategoriesController');
+Route::resource('/category', 'CategoriesController');
+Route::get('/cat/{id}', 'CategoriesController@show_list')->name('list');
+Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/profile', 'ProfileController@index')->name('profile');
+// Route::get('/', 'HomeController@index');
 
 

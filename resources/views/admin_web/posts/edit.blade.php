@@ -1,4 +1,4 @@
-@extends('layouts.index')
+@extends('layouts.admin.index')
 @section('content')
 <div class="content-wrapper" style="min-height: 1200.88px;">
     <!-- Content Header (Page header) -->
@@ -30,6 +30,9 @@
     </section>
 <br>
 <br>
+<div class="col-sm-10">
+<img  src="/posts_image/{{$post->photo ? $post->photo->file : 'No Photo'}}" alt=""></td>
+  </div>
 <div class="col-sm-10">
 	{!!Form::model($post, ['method'=>'PATCH', 'action'=>['AdminPostsController@update', $post->id],'files'=>'true']) !!}
    

@@ -1,4 +1,4 @@
-@extends('layouts.index')
+@extends('layouts.admin.index')
 @section('content')
 <div class="content-wrapper" style="min-height: 1200.88px;">
     <!-- Content Header (Page header) -->
@@ -61,7 +61,8 @@
       <td>{{$product->id}}</td>
       <td>{{$product->category ? $product->category->name : 'Uncategorized'}}</td>
       <td>{{$product->user ? $product->user->username : 'No user'}}</td>
-      <td><img height="50px" src="../product_images/{{$product->photo ? $product->photo->product_file : 'No Photo'}}" alt=""></td>
+      <td><img height="50px" src="../product_images/{{$product->photo ? $product->photo->product_file : 'No Photo'}}" alt="">
+      </td>
       <td><a style="color: black" href="{{route('products.edit', $product->id)}}">{{$product->name}}</a></td>
       <td>{{$product->price}}</td>
       <td>{{$product->qty}}</td>

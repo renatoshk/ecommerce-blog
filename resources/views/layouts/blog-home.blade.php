@@ -5,14 +5,14 @@
 <title>Kors Look</title>
 <meta content="" name="description">
 <meta content="" name="author">
-<link rel="shortcut icon" type="image/x-icon" href="frontend/images/favicon.ico">
-<link rel="icon" type="image/png" href="frontend/images/favicon.png">
-<link rel="apple-touch-icon" href="frontend/images/favicon.png">
-<link href="frontend/Bootstrap/css/bootstrap.css" rel="stylesheet">
-<link href="frontend/css/style.css" rel="stylesheet" type="text/css">
-<link href="frontend/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+<link rel="icon" type="image/png" href="{{asset('frontend/images/favicon.png')}}">
+<link rel="apple-touch-icon" href="{{asset('frontend/images/favicon.png')}}">
+<link href="{{asset('frontend/Bootstrap/css/bootstrap.css')}}" rel="stylesheet">
+<link href="{{asset('frontend/css/style.css')}}" rel="stylesheet" type="text/css">
+<link href="{{asset('frontend/css/font-awesome.css')}}" rel="stylesheet" type="text/css">
 <link href='https://fonts.googleapis.com/css?family=Poppins:300,500,600,700' rel='stylesheet' type='text/css'>
-<link href="frontend/css/owl.carousel.css" rel="stylesheet" type="text/css">
+<link href="{{asset('frontend/css/owl.carousel.css')}}" rel="stylesheet" type="text/css">
 </head>
 <body id="index">
 <div class="wrapar"> 
@@ -26,109 +26,30 @@
         <div class="user-info pull-right">
           <div class="user">
             <ul>
-              <li><a href="#" data-toggle="modal" data-target="#login">Login</a> 
-                <!-- Modal -->
-                <div class="modal fade" id="login" role="dialog">
-                  <div class="modal-dialog"> 
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <div class="panel-heading">
-                          <div class="panel-title pull-left">Login</div>
-                          <div class="pull-right"><a href="#">Forgot password?</a>
-                            <button aria-hidden="true" data-dismiss="modal" class="close btn btn-xs " type="button"> <i class="fa fa-times"></i> </button>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="modal-body">
-                        <form id="loginform" class="form-horizontal">
-                          <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                            <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="username or email">
-                          </div>
-                          <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                            <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
-                          </div>
-                          <div class="input-group">
-                            <div class="checkbox">
-                              <label>
-                                <input id="login-remember" type="checkbox" name="remember" value="1">
-                                Remember me</label>
-                            </div>
-                          </div>
-                          <div class="form-group"> 
-                            <!-- Button -->
-                            <div class="col-sm-12 controls"> <a id="btn-login" href="#" class="btn btn-primary btn-success">Login</a> <a id="btn-fblogin" href="#" class="btn btn-primary facebook">Login with</a> </div>
-                          </div>
-                        </form>
-                      </div>
-                      <div class="modal-footer">
-                        <div class="form-group">
-                          <div class="col-md-12 control">
-                            <div>Don't have an account! <a href="#">Sign Up Here</a></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li><a href="#" data-toggle="modal" data-target="#register">Register</a>
-                <div class="modal fade" id="register" role="dialog">
-                  <div class="modal-dialog"> 
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <div class="panel-heading">
-                          <div class="panel-title pull-left">Register</div>
-                          <div class="pull-right">
-                            <button aria-hidden="true" data-dismiss="modal" class="close" type="button"><i class="fa fa-times"></i> </button>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="modal-body">
-                        <div class="control-group"> 
-                          <!-- Username -->
-                          <label class="control-label"  for="username">Username</label>
-                          <div class="controls">
-                            <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
-                            <p class="help-block">Username can contain any letters or numbers, without spaces</p>
-                          </div>
-                        </div>
-                        <div class="control-group"> 
-                          <!-- E-mail -->
-                          <label class="control-label" for="email">E-mail</label>
-                          <div class="controls">
-                            <input type="text" id="email" name="email" placeholder="" class="input-xlarge">
-                            <p class="help-block">Please provide your E-mail</p>
-                          </div>
-                        </div>
-                        <div class="control-group"> 
-                          <!-- Password-->
-                          <label class="control-label" for="password">Password</label>
-                          <div class="controls">
-                            <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
-                            <p class="help-block">Password should be at least 4 characters</p>
-                          </div>
-                        </div>
-                        <div class="control-group"> 
-                          <!-- Password -->
-                          <label class="control-label"  for="password_confirm">Password (Confirm)</label>
-                          <div class="controls">
-                            <input type="password" id="password_confirm" name="password_confirm" placeholder="" class="input-xlarge">
-                            <p class="help-block">Please confirm password</p>
-                          </div>
-                        </div>
-                        <div class="control-group"> 
-                          <!-- Button -->
-                          <div class="controls">
-                            <button class="btn btn-success">Register</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
+             @if(Auth::guest())
+                     @include('auth.login')
+                     @include('auth.register')
+                @else
+                    <li><a href="/home">Home</a></li>
+                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="{{route('logout')}}" onclick="event.preventDefault();
+                                  document.getElementById('logout-form').submit();">
+                                  {{ __('Logout')}}
+                        </a>
+                    </li>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                   @csrf
+                  </form>
+
+            @endif
+            @if(Auth::check()) 
+              @if(Auth::user()->role_id == 1 && Auth::user()->is_active == 1)
+                <li>
+                  <a href="/adm">Admin</a>
+                </li>
+              @endif
+            @endif 
+         
             </ul>
           </div>
         </div>
@@ -138,7 +59,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-3 header-left">
-            <div class="logo"> <a href="http://localhost/blog/public/index.php"><img src="frontend/images/logo.png" alt="#"></a> </div>
+            <div class="logo"> <a href="/"><img src="{{asset('frontend/images/logo.png')}}" alt="#"></a> </div>
           </div>
           <div class="col-md-6 search_block">
             <div class="search">
@@ -218,7 +139,7 @@
   <!-- Header End --> 
   
   <!-- Main menu Start -->
-  <div id="main-menu">
+<div id="main-menu">
     <div class="container">
       <nav class="navbar navbar-default">
         <div class="navbar-header">
@@ -226,23 +147,9 @@
           <a href="#" class="navbar-brand">menu</a> </div>
         <div class="navbar-collapse collapse" id="navbar">
           <ul class="nav navbar-nav">
-            <li><a href="index.html">HOME</a></li>
-            <li><a href="grid-view.html">WOMEN</a></li>
-            <li><a href="grid-view.html">MEN</a><span class="new">new</span></li>
-            <li class="dropdown"> <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#"> PAGES<span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="http://localhost/blog/public/checkout">Checkout</a></li>
-                <li><a href="http://localhost/blog/public/cart">Shoping Cart</a></li>
-                <li><a href="http://localhost/blog/public/checkout-step-1">Billing & shipping address</a></li>
-                <li><a href="http://localhost/blog/public/checkout-step-2">Delivery method </a></li>
-                <li><a href="http://localhost/blog/public/checkout-step-3">Payment method</a></li>
-                <li><a href="http://localhost/blog/public/checkout-step-4">Order riview</a></li>
-                <li><a href="http://localhost/blog/public/404">Page Notfound</a></li>
-              </ul>
-            </li>
-            <li><a href="http://localhost/blog/public/blog">BLOG</a></li>
-            <li><a href="http://localhost/blog/public/contact">CONTACT US</a></li>
-            <li><a href="http://localhost/blog/public/about_us">ABOUT US</a></li>
+           
+            <li><a href="{{route('category')}}">home</a></li>
+         
           </ul>
         </div>
       </nav>
@@ -353,10 +260,10 @@
   
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
-<script src="frontend/js/jQuery.js"></script> 
+<script src="{{asset('frontend/js/jQuery.js')}}"></script> 
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
-<script src="frontend/Bootstrap/js/bootstrap.js"></script> 
-<script src="frontend/js/owl.carousel.min.js"></script> 
-<script src="frontend/js/globle.js"></script>
+<script src="{{asset('frontend/Bootstrap/js/bootstrap.js')}}"></script> 
+<script src="{{asset('frontend/js/owl.carousel.min.js')}}"></script> 
+<script src="{{asset('frontend/js/globle.js')}}"></script>
 </body>
 </html>

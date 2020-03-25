@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Product;
 use App\User;
@@ -47,6 +47,7 @@ class AdminProductController extends Controller
     {
         //
         $input = $request->all();
+        $user = Auth::user();
         if($file = $request->file('image_id')){
             $name = time().$file->getClientOriginalName();
             $file->move('product_images', $name);
@@ -54,7 +55,8 @@ class AdminProductController extends Controller
             $input['image_id'] = $photo->id; 
         }
 
-        Product::create($input);
+        // Product::create($input);
+        $user->products()->create($input);
         return redirect('/adm/products');
     }
 
@@ -93,7 +95,7 @@ class AdminProductController extends Controller
     public function update(EditProductRequest $request, $id)
     {
         //
-       $product = Product::findOrFail($id);
+       // $product = Product::findOrFail($id);
        $input = $request->all();
         if($file = $request->file('image_id')){
             $name = time() . $file->getClientOriginalName();
@@ -101,8 +103,8 @@ class AdminProductController extends Controller
             $photo = Photo_products::create(['product_file'=>$name]);
             $input['image_id'] = $photo->id;
         }
-
-        $product->update($input);
+        Auth::user()->products()->whereId($id)->first()->update($input);
+        // $product->update($input);
         return redirect('/adm/products');
     }
 

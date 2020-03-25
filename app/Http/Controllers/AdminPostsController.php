@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Photo_post;
@@ -45,6 +45,7 @@ class AdminPostsController extends Controller
     public function store(PostRequest $request)
     {
         //
+        $user = Auth::user();
         $inputPost = $request->all();
         if($file = $request->file('photo_id')){
             $name = time() . $file->getClientOriginalName();
@@ -52,7 +53,7 @@ class AdminPostsController extends Controller
             $photo = Photo_post::create(['file'=>$name]);
             $inputPost['photo_id'] = $photo->id;
         }
-        Post::create($inputPost);
+        $user->posts()->create($inputPost);
         return redirect('/adm/posts');
     }
 
@@ -92,7 +93,7 @@ class AdminPostsController extends Controller
     public function update(EditPostRequest $request, $id)
     {
         //
-        $updatePost = Post::findOrFail($id);
+        // $updatePost = Post::findOrFail($id);
         $inputPost = $request->all();
         if($file = $request->file('photo_id')){
             $name = time(). $file->getClientOriginalName();
@@ -100,7 +101,8 @@ class AdminPostsController extends Controller
             $photo = Photo_post::create(['file'=>$name]);
             $inputPost['photo_id'] = $photo->id;
         }
-        $updatePost->update($inputPost);
+        Auth::user()->posts()->whereId($id)->first()->update($inputPost);
+     
         return redirect('/adm/posts');
 
     }

@@ -50,4 +50,13 @@ class User extends Authenticatable
     public function products(){
         return $this->hasMany('App\Product');
     }
+    public function isAdmin(){
+        if($this->role->role == "admin" && $this->is_active == 1){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
 }

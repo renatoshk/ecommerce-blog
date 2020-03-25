@@ -1,0 +1,11 @@
+    <li class="dropdown"> <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#"> PAGES<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="http://localhost/blog/public/checkout">Checkout</a></li>
+                <li><a href="http://localhost/blog/public/cart">Shoping Cart</a></li>
+                <li><a href="http://localhost/blog/public/checkout-step-1">Billing & shipping address</a></li>
+                <li><a href="http://localhost/blog/public/checkout-step-2">Delivery method </a></li>
+                <li><a href="http://localhost/blog/public/checkout-step-3">Payment method</a></li>
+                <li><a href="http://localhost/blog/public/checkout-step-4">Order riview</a></li>
+                <li><a href="http://localhost/blog/public/404">Page Notfound</a></li>
+              </ul>
+            </li>

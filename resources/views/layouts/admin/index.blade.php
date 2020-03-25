@@ -29,8 +29,8 @@
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-    	@include('layouts.navbar')
-		@include('layouts.sidebar')
+    	@include('layouts.admin.navbar')
+		@include('layouts.admin.sidebar')
 		@yield('content')
   
 		<footer class="main-footer">

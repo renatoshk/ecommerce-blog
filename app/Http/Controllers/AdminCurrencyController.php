@@ -17,8 +17,9 @@ class AdminCurrencyController extends Controller
     {
         //
         $currencies =  Currency::all();
-         return view('admin_web.currencies.index', compact('currencies'));
+        return view('admin_web.currencies.index', compact('currencies'));
     }
+  
 
     /**
      * Show the form for creating a new resource.
@@ -40,10 +41,19 @@ class AdminCurrencyController extends Controller
      */
     public function store(CurrencyRequest $request)
     {
-        $currencyInput = $request->all();
-        $currencyInput['is_base_currency'] = 0;
+        $currencies =  Currency::where('is_base_currency','1')->first();
+        // dd($currencies);
+
+        if(!$currencies){
+             $currencyInput = $request->all();
+             $currencyInput['is_base_currency'] = 1;
+         }
+          else {
+            $currencyInput = $request->all();
+            $currencyInput['is_base_currency'] = 0;
+          }
         Currency::create($currencyInput);
-        return redirect('/adm/currencies', );
+        return redirect('/adm/currencies');
     }
 
     /**
@@ -98,4 +108,20 @@ class AdminCurrencyController extends Controller
         return redirect('/adm/currencies');
         //
     }
+  public function basecurrency($id){
+    
+     $update_currency = Currency::findOrFail($id);
+     $basecurrency = $update_currency['is_base_currency'];
+     if($basecurrency == 0){
+       Currency::where('id', $id)->update(array('is_base_currency' => 1));
+       Currency::where('id','!=', $id)->update(array('is_base_currency' => 0));
+     }
+    
+     
+  
+     return redirect('/adm/currencies');
+  }
+
+
+
 }

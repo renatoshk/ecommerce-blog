@@ -1,4 +1,4 @@
-@extends('layouts.index')
+@extends('layouts.admin.index')
 @section('content')
 <div class="content-wrapper" style="min-height: 1200.88px;">
     <!-- Content Header (Page header) -->
@@ -17,7 +17,9 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
+<div class="col-sm3">
+    <img  src="/product_images/{{$product->photo ? $product->photo->product_file : 'No Photo'}}" alt="">
+</div>
 <div class="col-sm-10">
 	{!!Form::model($product, ['method'=>'PATCH', 'action'=>['AdminProductController@update', $product->id],'files'=>true])!!}
    

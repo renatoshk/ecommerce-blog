@@ -1,4 +1,4 @@
-@extends('layouts.index')
+@extends('layouts.admin.index')
 @section('content')
 
 <div class="content-wrapper" style="min-height: 1200.88px;">
@@ -45,11 +45,13 @@
                  <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Currency Name</th>
+                    <th scope="col">Currency Code</th>
                     <th scope="col">Currency Symbol</th>
                     <th scope="col">Is Base Currency</th>
                     <th scope="col">Rates</th>
                     <th scope="col">Created time</th>
                     <th scope="col">Modified time</th>
+                    <th scope="col">Base Currency</th>
                     <th scope="col">Edit</th>
                     <th scope="col">Delete</th>
                   </tr>
@@ -61,11 +63,22 @@
                 <tr>
                   <td>{{$currency->id}}</td>
                   <td>{{$currency->currency_name}}</td>
+                  <td>{{$currency->currency_code}}</td>
                   <td>{{$currency->currency_symbol}}</td>
                   <td>{{$currency->is_base_currency}}</td>
                   <td>{{$currency->currency_rate}}</td>
                   <td>{{$currency->created_at ? $currency->created_at->diffForHumans() : 'No data'}}</td>
                   <td>{{$currency->updated_at ? $currency->updated_at->diffForHumans() : 'No data'}}</td>
+                  <td>
+
+                 {!!Form::model($currency,['method'=>'PATCH', 'action'=>['AdminCurrencyController@basecurrency', $currency->id]]) !!}
+                  <div class="form-group">
+                  {!!Form::submit('Make Base', ['class'=>'btn btn-primary'])!!}
+                  </div>
+                  {!!Form::close()!!}
+
+                </td>
+
                   <td><a style="color:black" href="{{route('currencies.edit', $currency->id)}}">Edit</a></td>
                   <td>
                    {!!Form::open(['method'=>'DELETE', 'action'=>['AdminCurrencyController@destroy',$currency->id]])!!}

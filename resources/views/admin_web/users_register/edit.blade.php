@@ -1,4 +1,4 @@
-@extends('layouts.index')
+@extends('layouts.admin.index')
 @section('content')
 <div class="content-wrapper" style="min-height: 1200.88px;">
     <!-- Content Header (Page header) -->
@@ -18,6 +18,9 @@
       </div><!-- /.container-fluid -->
     </section>
 <!-- Editimi i Users -->
+<div class="col-sm-2">
+       <img src="/images/{{Auth::user()->photo->user_register_file}}" alt="" class="img-responsive">
+</div>
 <div class="col-sm-10">	
 		{!!Form::model($user, ['method'=>'PATCH' , 'action'=>['AdminUsersController@update', $user->id], 'files'=>true])!!}
 		
@@ -42,11 +45,6 @@
 			     {!!Form::label('photo_id', 'Image:')!!}
 			     {!!Form::file('photo_id',null, ['class'=>'form-control'])!!}
 			</div>
-			<div class="form-group">
-			     {!!Form::label('password', 'Password:')!!}
-			     {!!Form::password('password',['class'=>'form-control'])!!}
-			</div>
-
 			<div class="form-group">
 				{!!Form::submit('Update User', ['class'=>'btn btn-primary'])!!}
 			</div>
