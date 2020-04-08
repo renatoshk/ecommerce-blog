@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\PaymentRequest;
+use App\Order;
+ use Illuminate\Support\Facades\Session;
 class PaymentController extends Controller
 {
     /**
@@ -14,6 +17,15 @@ class PaymentController extends Controller
     public function index()
     {
         //
+        $user = Auth::user();
+        if($user){
+
+            return view('web.checkout-step-4');
+        }
+
+        else {
+            return redirect('/');
+        }
     }
 
     /**
@@ -32,9 +44,31 @@ class PaymentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PaymentRequest $request)
     {
         //
+        $user = Auth::user();
+        if($user){
+           $orders= Order::where('user_id' , $user->id)->where('status', 'none')->pluck('id')->toArray();
+           $orders_status = Order::where('status', 'none')->where('user_id', $user->id)->get();
+          if(count($orders) > 0){
+            $input = $request->all();
+            $input['order_id'] = implode(',', $orders);
+            $user->orders()->update(['status'=>'purchase']);
+            $user->payments()->create($input);
+            Session::flash('flash_message', 'Your order is completed and we will send it in your address!');
+            return redirect('/orders');
+          } 
+          else {
+            Session::flash('flash_message', 'Your cart is empty!');
+            return redirect()->back();
+          }
+        }
+        else {
+              Session::flash('flash_message', 'You need to login to continue shopping!');
+            return redirect('/');
+        }
+
     }
 
     /**

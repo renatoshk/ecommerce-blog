@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Photo_products;
 use App\Product;
+use Illuminate\Support\Facades\Auth;
+use App\Order;
+use App\Post;
 class CategoriesController extends Controller
 {
     /**
@@ -17,7 +20,18 @@ class CategoriesController extends Controller
     {
         $categories = Category::all();
         $products = Product::all();
-        return view('web.index', compact('categories', 'products'));
+        $posts = Post::all();
+        $user = Auth::user();
+        $total_price = 0;
+        $orders_count = 0;
+        $orders =0;
+     if($user){
+            $orders = Order::orderBy('created_at')->where('user_id', $user->id)->where('status', 'none')->paginate(2);
+            $orders_count = Order::orderBy('created_at')->where('user_id', $user->id)->where('status','none')->count();
+            $total_price = Order::orderBy('created_at')->where('user_id', $user->id)->where('status', 'none')->sum('total_price');
+           
+         } 
+    return view('web.index', compact('categories', 'products', 'orders_count', 'total_price', 'orders', 'posts'));
         //
     }
 
@@ -101,4 +115,7 @@ class CategoriesController extends Controller
         $products = Product::orderBy('created_at', 'DESC')->where('category_id', $id)->paginate(3);
         return view('web.list-view', compact('categories', 'products', 'cats', 'prods'));
     }
+
+
+
 }

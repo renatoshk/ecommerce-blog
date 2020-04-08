@@ -17,6 +17,13 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
+    <br>
+    @if ( Session::has('flash_message') )
+      <div class="alert {{ Session::get('flash_type', 'alert-danger') }}">
+          <h3>{{ Session::get('flash_message') }}</h3>
+      </div>
+   @endif
+    <br>
    <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -46,7 +53,8 @@
             <th scope="col">Photo</th>
             <th scope="col">Name</th>
             <th scope="col">Price</th>
-             <th scope="col">Quantity</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Status</th>
             <th scope="col">Created_at</th>
             <th scope="col">Updated_at</th>
             <th scope="col">Edit</th>
@@ -66,6 +74,7 @@
       <td><a style="color: black" href="{{route('products.edit', $product->id)}}">{{$product->name}}</a></td>
       <td>{{$product->price}}</td>
       <td>{{$product->qty}}</td>
+      <td>{{$product->status}}</td>
       <td>{{$product->created_at ? $product->created_at->diffForHumans() : 'No data'}}</td>
       <td>{{$product->updated_at ? $product->updated_at->diffForHumans() : 'No data'}}</td>
       <td><a style="color: black" href="{{route('products.edit', $product->id)}}">Edit</a></td>

@@ -1,6 +1,6 @@
 @extends('layouts.webi.index')
 @section ('content')
-<!-- offer block Start  -->
+  <!-- offer block Start  -->
   <div id="offer">
     <div class="container">
       <div class="offer">
@@ -9,24 +9,33 @@
     </div>
   </div>
   <!-- offer block end  --> 
-  
+  <br>
+  <br>
+  @if ( Session::has('flash_message') )
+  <div class="alert {{ Session::get('flash_type', 'alert-danger') }}">
+      <h3>{{ Session::get('flash_message') }}</h3>
+  </div>
+@endif
+  <br>
+  <br>
+
   <!-- bredcrumb and page title block start  -->
   <div id="bread-crumb">
     <div class="container">
       <div class="row">
         <div class="col-md-5 col-sm-5 col-xs-5">
           <div class="page-title">
-            <h4>Order</h4>
+            <h4>Payment method</h4>
           </div>
         </div>
         <div class="col-md-7 col-sm-7 col-xs-7">
           <div class="bread-crumb">
             <ul>
-              <li><a href="http://localhost/blog/public/index.php">home</a></li>
+              <li><a href="/">home</a></li>
               <li>\</li>
-              <li><a href="cart.html">cart</a></li>
+              <li><a href="/"> cart </a></li>
               <li>\</li>
-              <li><a href="http://localhost/blog/public/checkout-step-4">Order</a></li>
+              <li><a href="checkout-step-4"> Payment method</a></li>
             </ul>
           </div>
         </div>
@@ -34,126 +43,90 @@
     </div>
   </div>
   <!-- bredcrumb and page title block end  -->
+  
   <div id="checkout-step-contain">
     <div class="container">
       <div class="account-content checkout-staps">
         <div class="staps">
-          <div class="row">
+         <div class="row">
             <div class="col-md-3 col-sm-6 col-xs-12">
               <div class="checkout-stap ">
-                <div class="title"> <span class="stap">1 </span><a href="checkout-step1.html">Billing &amp; Shipping Address</a></div>
+                <div class="title"> <span class="stap">1 </span><a href="/checkout-step-1">Billing &amp; Shipping Address</a></div>
               </div>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-12">
               <div class="checkout-stap ">
-                <div class="title"><span class="stap">2 </span><a href="checkout-step2.html">Shipping Method</a></div>
+                <div class="title"><span class="stap">2 </span><a href="/checkout-step-2">Shipping Method</a></div>
               </div>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-12">
               <div class="checkout-stap">
-                <div class="title"><span class="stap">3 </span><a href="checkout-step3.html">Payment Method</a></div>
+                <div class="title"><span class="stap">3 </span><a href="/checkout-step-3">Confirm Order</a></div>
               </div>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-12">
               <div class="checkout-stap active">
-                <div class="title"><span class="stap">4 </span><a href="checkout-step4.html">Order</a></div>
+                <div class="title"><span class="stap">4 </span><a href="/checkout-step-4">Payment</a></div>
               </div>
             </div>
+          </div>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-lg-12">
-          <h2 class="delivery-method tf">Order Riview</h2>
-        </div>
-        <div class="col-md-12">
-          <div class="cart-content table-responsive">
-            <table class="cart-table ">
-              <tbody>
-                <tr class="Cartproduct carttableheader">
-                  <td style="width:10%"> Product</td>
-                  <td style="width:45%">Details</td>
-                  <td style="width:10%">QNT</td>
-                  <td style="width:5%">Discount</td>
-                  <td style="width:15%">Total</td>
-                  <td class="delete" style="width:10%">&nbsp;</td>
-                </tr>
-                <tr class="Cartproduct">
-                  <td ><div class="image"><a href="product-details.html"><img alt="img" src="images/product/cart70x92.jpg"></a></div></td>
-                  <td><div class="product-name">
-                      <h3><a href="product-detail-view.html">Black African Print Pencil Skirt </a></h3>
-                    </div>
-                    <span class="size">24 x 2.3 M</span>
-                    <div class="price"><span>$8.80</span></div></td>
-                  <td class="product-quantity"><div class="quantity">
-                      <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="cart" min="0" step="1">
-                    </div></td>
-                  <td>0</td>
-                  <td class="price">$300</td>
-                  <td class="delete"><a title="Delete"> <i class="glyphicon glyphicon-trash "></i></a></td>
-                </tr>
-                <tr class="Cartproduct">
-                  <td ><div class="image"><a href="product-details.html"><img alt="img" src="images/product/cart2-70x92.jpg"></a></div></td>
-                  <td><div class="product-name">
-                      <h3><a href="product-detail-view.html">Black African Print Pencil Skirt </a></h3>
-                    </div>
-                    <span class="size">24 x 2.3 M</span>
-                    <div class="price"><span>$8.80</span></div></td>
-                  <td class="product-quantity"><div class="quantity">
-                      <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="cart" min="0" step="1">
-                    </div></td>
-                  <td>0</td>
-                  <td class="price">$300</td>
-                  <td class="delete"><a title="Delete"> <i class="glyphicon glyphicon-trash"></i></a></td>
-                </tr>
-                <tr class="Cartproduct">
-                  <td ><div class="image"><a href="product-details.html"><img alt="img" src="images/product/car3-70x92.jpg"></a></div></td>
-                  <td><div class="product-name">
-                      <h3><a href="product-detail-view.html">Black African Print Pencil Skirt </a></h3>
-                    </div>
-                    <span class="size">24 x 2.3 M</span>
-                    <div class="price"><span>$8.80</span></div></td>
-                  <td class="product-quantity"><div class="quantity">
-                      <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="cart" min="0" step="1">
-                    </div></td>
-                  <td>0</td>
-                  <td class="price">$300</td>
-                  <td class="delete"><a title="Delete"> <i class="glyphicon glyphicon-trash "></i></a></td>
-                </tr>
-                <tr class="cart-detail">
-                  <td colspan="4">Total products</td>
-                  <td colspan="2" class="price">$216.51</td>
-                </tr>
-                <tr class="cart-detail">
-                  <td colspan="4">Shipping</td>
-                  <td colspan="2" class="price"><span class="success">Free shipping!</span></td>
-                </tr>
-                <tr class="cart-detail cart-total-price ">
-                  <td colspan="4" >Total (tax excl.)</td>
-                  <td colspan="2" class="price">$216.51</td>
-                </tr>
-                <tr class="cart-detail">
-                  <td colspan="4">Total tax</td>
-                  <td colspan="2" class="price" id="total-tax">0.00</td>
-                </tr>
-                <tr class="cart-detail">
-                  <td colspan="4"> Total</td>
-                  <td colspan="2" class="price" id="total-price">$216.51</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <h2 class="delivery-method tf"> Choose your Payment method </h2>
         </div>
         <div class="col-xs-12 col-sm-12">
-          <div class="cart-bottom">
-            <div class="box-footer">
-              <div class="pull-left"><a href="checkout-step3.html" class="btn btn-default"> <i class="fa fa-arrow-left"></i> &nbsp; Payment Method </a></div>
-              <div class="pull-right"> <a class="btn btn-primary btn-small " href="thanks-for-order.html"> Confirm Order &nbsp; <i class="fa fa-check"></i> </a> </div>
+          <div class="paymentBox">
+            <div class="accordion">
+             
+              <!--end .accordion-section-->
+                
+                {!!Form::open(['method'=>'POST', 'action'=>'PaymentController@store'])!!}
+                  <div class="panel-body">
+                    <p>All transactions are secure and encrypted, and we neverstor Tolearn more, please view our privacy policy.</p>
+                    <br>
+                    <div class=" open">
+                      <div class="creditCard">
+                        <label for="CardNumber">Credit Card Number *</label>
+                        <input type="text" name="credit_card_number" class="form-control" id="CardNumber">
+                      </div>
+                      <div class="paymentInput">
+                        <label for="CardNumber2">Name on Credit Card *</label>
+                        <input type="text" class="form-control" id="CardNumber2" name="credit_card_name">
+                      </div>
+                      <div class="paymentInput">
+                        <div class="form-group">
+                          <label>Expiration date *</label>
+                         <input type="date" name="expiration" class="form-control">
+                        </div>
+                      </div>
+                      <div class="paymentInput clearfix">
+                        <label for="VerificationCode">Verification Code
+                          *</label>
+                        <input type="text" class="form-control" name="verification_number" id="VerificationCode">
+                      </div>
+                      <div>
+                        <input type="checkbox" id="saveInfoid">
+                        <label for="saveInfoid" class="saveinfo">&nbsp;Save my Card information</label>
+                      </div>
+                    </div>
+                     <div class="pull-right">
+                         <input type="submit" name="submit" value="Continue to Order" class="form-control btn btn-primary">
+
+                     </div>
+                  </div>
+                  {!!Form::close()!!}
+                </div>
+                <!--end .accordion-section-content--> 
+              </div>
+              <!--end .accordion-section--> 
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
+      
+   
+ 
 
 @stop

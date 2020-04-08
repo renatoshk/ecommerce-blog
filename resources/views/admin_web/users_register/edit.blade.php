@@ -17,9 +17,16 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
+    <br>
+		@if ( Session::has('flash_message') )
+		<div class="alert {{ Session::get('flash_type', 'alert-info') }}">
+		  <h3>{{ Session::get('flash_message') }} <a href="{{route('users.index')}}">Click Here to see it!</a></h3>
+		</div>
+		@endif
+    <br>
 <!-- Editimi i Users -->
 <div class="col-sm-2">
-       <img src="/images/{{Auth::user()->photo->user_register_file}}" alt="" class="img-responsive">
+       <img style="height:500px;" src="/images/{{$user->photo ? $user->photo->user_register_file : 'No Photo'}}" alt="" class="img-responsive">
 </div>
 <div class="col-sm-10">	
 		{!!Form::model($user, ['method'=>'PATCH' , 'action'=>['AdminUsersController@update', $user->id], 'files'=>true])!!}

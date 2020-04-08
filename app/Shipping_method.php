@@ -8,5 +8,6 @@ class Shipping_method extends Model
 {
     //
     protected $fillable = ['method_name', 'duration', 'price'];
+   
 
 }

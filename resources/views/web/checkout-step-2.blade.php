@@ -9,7 +9,15 @@
     </div>
   </div>
   <!-- offer block end  --> 
-  
+  <br>
+  <br>
+  @if ( Session::has('flash_message') )
+  <div class="alert {{ Session::get('flash_type', 'alert-danger') }}">
+      <h3>{{ Session::get('flash_message') }}</h3>
+  </div>
+@endif
+  <br>
+  <br>
   <!-- bredcrumb and page title block start  -->
   <div id="bread-crumb">
     <div class="container">
@@ -22,11 +30,11 @@
         <div class="col-md-7 col-sm-7 col-xs-7">
           <div class="bread-crumb">
             <ul>
-              <li><a href="http://localhost/blog/public/index.php">home </a></li>
+              <li><a href="/">home </a></li>
               <li>\</li>
-              <li><a href="cart.html"> cart </a></li>
+              <li><a href="/cart"> cart </a></li>
               <li>\</li>
-              <li><a href="checkout-step2.html"> delivery method</a></li>
+              <li><a href="/checkout-step-3"> delivery method</a></li>
             </ul>
           </div>
         </div>
@@ -39,27 +47,28 @@
     <div class="container">
       <div class="account-content checkout-staps">
         <div class="staps">
-          <div class="row">
+         <div class="row">
             <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="checkout-stap">
-                <div class="title"> <span class="stap">1 </span><a href="checkout-step1.html">Billing &amp; Shipping Address</a></div>
+              <div class="checkout-stap ">
+                <div class="title"> <span class="stap">1 </span><a href="/checkout-step-1">Billing &amp; Shipping Address</a></div>
               </div>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="checkout-stap active">
-                <div class="title"><span class="stap">2 </span><a href="checkout-step2.html">Shipping Method</a></div>
-              </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="checkout-stap">
-                <div class="title"><span class="stap">3 </span><a href="checkout-step3.html">Payment Method</a></div>
+              <div class="checkout-stap active ">
+                <div class="title"><span class="stap">2 </span><a href="/checkout-step-2">Shipping Method</a></div>
               </div>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-12">
               <div class="checkout-stap">
-                <div class="title"><span class="stap">4 </span><a href="checkout-step4.html">Order</a></div>
+                <div class="title"><span class="stap">3 </span><a href="/checkout-step-3">Confirm Order</a></div>
               </div>
             </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="checkout-stap ">
+                <div class="title"><span class="stap">4 </span><a href="/checkout-step-4">Payment</a></div>
+              </div>
+            </div>
+          </div>
           </div>
         </div>
       </div>
@@ -67,11 +76,12 @@
         <div class="col-lg-12">
           <h2 class="delivery-method tf"> Choose your delivery method </h2>
         </div>
+        {!!Form::open(['method'=>'POST', 'action'=>'ShippingController@store'])!!}
         <div class="col-xs-12 col-sm-12">
           <div class="row">
             <div class="form-group col-lg-4 col-sm-4 col-md-4 -col-xs-12">
               <label for="id_country">Country</label>
-              <select name="id_country" id="id_country" aria-required="true" class="form-control select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+              <select name="country" id="id_country" aria-required="true" class="form-control select2-hidden-accessible" tabindex="-1" aria-hidden="true">
                 <option value="">Choose</option>
                 <option value="38">Algeria</option>
                 <option value="39">American Samoa</option>
@@ -126,110 +136,55 @@
               </select>
               <span aria-hidden="true" class="dropdown-wrapper"></span> </div>
             <div class="form-group  col-lg-4 col-sm-4 col-md-4 -col-xs-12" id="states">
-              <label for="id-state">State</label>
-              <select name="id-state" id="id-state" aria-required="true" class="form-control select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                <option value="">Choose</option>
-                <option value="1">Alabama</option>
-                <option value="2">Alaska</option>
-                <option value="3">Arizona</option>
-                <option value="4">Arkansas</option>
-                <option value="5">California</option>
-                <option value="6">Colorado</option>
-                <option value="7">Connecticut</option>
-                <option value="8">Delaware</option>
-                <option value="9">Florida</option>
-                <option value="10">Georgia</option>
-                <option value="11">Hawaii</option>
-                <option value="12">Idaho</option>
-                <option value="13">Illinois</option>
-                <option value="14">Indiana</option>
-                <option value="15">Iowa</option>
-                <option value="16">Kansas</option>
-                <option value="17">Kentucky</option>
-                <option value="18">Louisiana</option>
-                <option value="19">Maine</option>
-                <option value="20">Maryland</option>
-                <option value="21">Massachusetts</option>
-                <option value="22">Michigan</option>
-                <option value="23">Minnesota</option>
-                <option value="24">Mississippi</option>
-                <option value="25">Missouri</option>
-                <option value="26">Montana</option>
-                <option value="27">Nebraska</option>
-                <option value="28">Nevada</option>
-                <option value="29">New Hampshire</option>
-                <option value="30">New Jersey</option>
-                <option value="31">New Mexico</option>
-                <option value="32">New York</option>
-                <option value="33">North Carolina</option>
-                <option value="34">North Dakota</option>
-                <option value="35">Ohio</option>
-                <option value="36">Oklahoma</option>
-                <option value="37">Oregon</option>
-                <option value="38">Pennsylvania</option>
-                <option value="39">Rhode Island</option>
-                <option value="40">South Carolina</option>
-                <option value="41">South Dakota</option>
-                <option value="42">Tennessee</option>
-                <option value="43">Texas</option>
-                <option value="44">Utah</option>
-                <option value="45">Vermont</option>
-                <option value="46">Virginia</option>
-                <option value="47">Washington</option>
-                <option value="48">West Virginia</option>
-                <option value="49">Wisconsin</option>
-                <option value="50">Wyoming</option>
-                <option value="51">Puerto Rico</option>
-                <option value="52">US Virgin Islands</option>
-                <option value="53">District of Columbia</option>
-              </select>
-              <span aria-hidden="true" class="dropdown-wrapper"></span> </div>
+             <label for="Address">Address</label>
+              <input type="text" class="form-control" name="address">
+              <span aria-hidden="true" class="dropdown-wrapper"></span> 
+            </div>
             <div class="form-group  col-lg-4 col-sm-4 col-md-4 -col-xs-12">
               <label for="zipcode">Zip Code</label>
-              <input type="text" class="form-control" name="zipcode" id="zipcode">
+              <input type="text" class="form-control" name="zip_code" id="zipcode">
             </div>
             <div class="form-group col-lg-12 col-sm-12 col-md-12 -col-xs-12">
               <table class="table-bordered table">
                 <tbody>
                   <tr>
-                    <td> Carrier</td>
+                    <td>Select</td>
                     <td>Method</td>
-                    <td>Information</td>
+                    <td>Duration</td>
                     <td>Price!</td>
                   </tr>
+                  @if($shipping_methods)
+                  @foreach($shipping_methods as $shipping_method)
                   <tr>
-                    <td><div class="radio">
+                    <td>
+                      <div class="radio">
                         <label>
-                          <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" >
-                          <i class="fa  fa-plane fa-2x"></i> </label>
+                          <input type="radio" name="shipping_id" id="shipping_id" value="{{$shipping_method->id}}">
+                        </label>
                       </div></td>
-                    <td> By Road</td>
-                    <td>Pick up in-store</td>
-                    <td>Free!</td>
+                    <td>{{$shipping_method->method_name}}</td>
+                    <td>{{$shipping_method->duration}}</td>
+                    <td>${{$shipping_method->price}}</td>
                   </tr>
-                  <tr>
-                    <td><div class="radio">
-                        <label>
-                          <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" >
-                          <i class="fa fa-truck fa-2x"></i> </label>
-                      </div></td>
-                    <td> By Road</td>
-                    <td>Pick up in-store</td>
-                    <td>Free!</td>
-                  </tr>
+                  @endforeach
+                 @endif
                 </tbody>
               </table>
             </div>
           </div>
           <div class="cart-bottom">
             <div class="box-footer">
-              <div class="pull-left"><a href="checkout-step1.html" class="btn btn-default"> <i class="fa fa-arrow-left"></i> &nbsp; Shipping address </a></div>
-              <div class="pull-right"><a class="btn btn-primary btn-small " href="checkout-step3.html"> Payment Method&nbsp; <i class="fa fa-arrow-circle-right"></i> </a></div>
+              <div class="pull-left"><a href="/checkout-step-1" class="btn btn-default"> <i class="fa fa-arrow-left"></i> &nbsp; Previous </a>
+              </div>
+              <div class="pull-right">
+               <input type="submit" name="submit" value="Continue to Payment" class="form-control btn btn-primary">
+
+              </div>
             </div>
           </div>
         </div>
+        {!!Form::close()!!}
       </div>
     </div>
-  </div>
   
 @stop

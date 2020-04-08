@@ -8,15 +8,12 @@ class User_Checkout extends Model
 {
 	protected $fillable = ['order_id', 'name', 'surname', 'email', 'address', 'country', 'city', 'zip_code', 'phone_number', 'additional_information'];
     //
-    public function order(){
-    	return $this->belongsTo('App\Order');
-    }
 
-    public function payments(){
-    	return $this->hasMany('App\Payment');
+   
+    public function user(){
+        return $this->belongsTo('App\User', 'user_id');
     }
-
-    public function shippings(){
-    	return $this->hasMany('App\Shipping');
+    public function orders(){
+    	return $this->belongsTo('App\Order', 'order_id');
     }
 }

@@ -32,6 +32,7 @@
         <tr>
           <th scope="col">Id</th>
           <th scope="col">Product</th>
+          <th scope="col">Client</th>
           <th scope="col">Status</th>
           <th scope="col">Quantity</th>
           <th scope="col">Total Price</th>
@@ -47,15 +48,16 @@
     <tr>
       <td>{{$order->id}}</td>
       <td>{{$order->product ? $order->product->id : 'Uncategorized'}}</td>
+      <td>{{$order->user ? $order->user->username : 'No user'}}</td>
       <td>{{$order->status}}</td>
-      <td>{{$order->quantity}}</td>
-       <td>{{$order->total_price}}</td>
+      <td>{{$order->qty}}</td>
+       <td>${{$order->total_price}}</td>
       <td>{{$order->created_at ? $order->created_at->diffForHumans() : 'No data'}}</td>
       <td>{{$order->updated_at ? $order->updated_at->diffForHumans() : 'No data'}}</td>
       <td>
         {!!Form::open(['method'=>'DELETE', 'action'=>['AdminOrdersController@destroy', $order->id]])!!}
               <div class="form-group">
-                 {!!Form::submit('DELETE', ['class'=>'form-control btn btn-danger'])!!}
+                {!!Form::submit('DELETE', ['class'=>'form-control btn btn-danger'])!!}
               </div>
         {!!Form::close()!!}
       </td>

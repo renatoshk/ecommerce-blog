@@ -9,7 +9,7 @@ use App\Category;
 use App\Photo_products;
 use App\Http\Requests\ProductRequest;
 use App\Http\Requests\EditProductRequest;
-
+use Illuminate\Support\Facades\Session;
 class AdminProductController extends Controller
 {
     /**
@@ -57,7 +57,8 @@ class AdminProductController extends Controller
 
         // Product::create($input);
         $user->products()->create($input);
-        return redirect('/adm/products');
+        Session::flash('flash_message', 'The Product has been created!');
+        return redirect()->back();
     }
 
     /**
@@ -94,8 +95,7 @@ class AdminProductController extends Controller
      */
     public function update(EditProductRequest $request, $id)
     {
-        //
-       // $product = Product::findOrFail($id);
+       
        $input = $request->all();
         if($file = $request->file('image_id')){
             $name = time() . $file->getClientOriginalName();
@@ -104,8 +104,8 @@ class AdminProductController extends Controller
             $input['image_id'] = $photo->id;
         }
         Auth::user()->products()->whereId($id)->first()->update($input);
-        // $product->update($input);
-        return redirect('/adm/products');
+        Session::flash('flash_message', 'The Product has been updated!');
+        return redirect()->back();
     }
 
     /**
@@ -119,6 +119,7 @@ class AdminProductController extends Controller
         //
         $product = Product::findOrFail($id);
         $product->delete();
-       return redirect('/adm/products');
+        Session::flash('flash_message', 'The Product has been deleted!');
+        return redirect()->back();
     }
 }

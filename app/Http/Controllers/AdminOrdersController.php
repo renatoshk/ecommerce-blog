@@ -17,10 +17,13 @@ class AdminOrdersController extends Controller
     public function index()
     {
         //
-       $orders = Order::all();
+       $orders = Order::orderBy('created_at')->where('status', 'none')->get();
        return view('admin_web.products.orders.index', compact('orders'));
     }
-
+    public function purchase_orders(){
+        $orders = Order::orderBy('created_at')->where('status', 'purchase')->get();
+        return view('admin_web.products.orders.index', compact('orders'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -85,6 +88,6 @@ class AdminOrdersController extends Controller
     public function destroy($id)
     {
         Order::findOrFail($id)->delete();
-        return redirect('/adm/orders');
+        return redirect()->back();
     }
 }

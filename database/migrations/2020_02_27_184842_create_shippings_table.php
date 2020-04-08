@@ -16,6 +16,7 @@ class CreateShippingsTable extends Migration
         Schema::create('shippings', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index()->nullable();
+            $table->string('order_id');
             $table->integer('shipping_id');
             $table->string('address');
             $table->integer('zip_code');

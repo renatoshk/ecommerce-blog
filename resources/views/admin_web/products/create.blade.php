@@ -17,7 +17,13 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
+<br>
+@if ( Session::has('flash_message') )
+  <div class="alert {{ Session::get('flash_type', 'alert-info') }}">
+      <h3>{{ Session::get('flash_message') }} <a href="{{route('products.index')}}">Click Here to see it!</a></h3>
+  </div>
+@endif
+<br>
     <div class="col-sm-6">
 	{!!Form::open(['method'=>'POST', 'action'=>'AdminProductController@store','files'=>'true']) !!}
    

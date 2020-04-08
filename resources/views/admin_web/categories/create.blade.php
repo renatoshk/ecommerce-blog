@@ -18,6 +18,11 @@
       </div><!-- /.container-fluid -->
     </section>
 <br>
+@if ( Session::has('flash_message') )
+  <div class="alert {{ Session::get('flash_type', 'alert-info') }}">
+      <h3>{{ Session::get('flash_message') }}<a href="{{route('categories.index')}}">Click here to see it!</a></h3>
+  </div>
+@endif
 <br>
 <!-- Krijimi  e categories -->
 <div class="col-sm-10">

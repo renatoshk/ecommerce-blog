@@ -51,38 +51,6 @@
 
                 </ul>
               </div>
-            {{--   <div class="sidebar-widget Shop-by-block">
-                <div class="sidebar-title">
-                  <h4>Shop by</h4>
-                </div>
-                <ul class="title-toggle">
-                  <li class="category">
-                    <h5><a href="grid-view.html">Category</a></h5>
-                    <ul>
-                      <li><a href="grid-view.html">Bags 2 </a></li>
-                      <li><a href="grid-view.html">Clothing x2 2 (0)</a></li>
-                      <li><a href="grid-view.html">Lingerie 2 (0) </a></li>
-                    </ul>
-                  </li>
-                  <li class="color">
-                    <h5><a href="grid-view.html">Color</a></h5>
-                    <ul>
-                      <li><a href="grid-view.html">red (2) </a></li>
-                      <li><a href="grid-view.html">blue (5)</a></li>
-                      <li><a href="grid-view.html">yelow (0) </a></li>
-                      <li><a href="grid-vier.html">black (4)</a></li>
-                    </ul>
-                  </li>
-                  <li class="manufacture">
-                    <h5><a href="grid-view.html">Manufacture</a></h5>
-                    <ul>
-                      <li><a href="grid-view.html">Bags 2 </a></li>
-                      <li><a href="grid-view.html">Clothing x2 2 (0)</a></li>
-                      <li><a href="grid-view.html">Lingerie 2 (0) </a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </div> --}}
               <div class="sidebar-widget Best-Products-block">
                 <div class="sidebar-title">
                   <h4> Best Products</h4>
@@ -91,22 +59,30 @@
                   <li>
                     @if($prods)
                       @foreach($prods as $prod)
+                       {!!Form::open(['method'=>'POST', 'action'=>'OrderController@store'])!!}
                     <div class="product-block ">
                       <div class="item col-md-4 col-sm-4 col-xs-4">
-                        <div class="image"> <a href="product-detail-view.html"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="../product_images/{{$prod->photo ? $prod->photo->product_file : ''}}"></a>
+                        <div class="image"> <a href="{{route('product.show', $prod->id)}}"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="../product_images/{{$prod->photo ? $prod->photo->product_file : ''}}"></a>
                         </div>
                       </div>
                       <div class="item col-md-8 col-sm-8 col-xs-8">
                         <div class="product-details">
                           <div class="product-name">
-                            <h5><a href="product-detail-view.html">{{$prod->name}} </a></h5>
+                            <h2><input type="hidden" name="product_id" value="{{$prod->id}}"><a href="{{route('product.show', $prod->id)}}">{{$prod->name}} </a></h2>
                           </div>
                           <div class="review"></div>
-                          <div class="price"> <span class="price-new">${{$prod->price}}</span> </div>
-                          <div class="addto-cart"><a href="#">Add to Cart</a></div>
+                          <div class="price">
+                             <input type="hidden" name="total_price" value="{{$prod->price}}"> <span class="price-new">${{$prod->price}}</span>
+                          </div>
+                          <input type="hidden" name="qty" value="1">
+                          <div class="addto-cart">
+                           {!!Form::submit('Add to Cart', ['class'=>'btn btn-primary btn-sm'])!!}
+                          </div>
+                          <br>
                         </div>
                       </div>
                     </div>
+                       {!!Form::close()!!}
                      @endforeach
                     @endif
                   </li>
@@ -163,20 +139,27 @@
                 <li>
                   @if($products)
                   @foreach($products as $product)
+                    {!!Form::open(['method'=>'POST', 'action'=>'OrderController@store'])!!}
                   <div class="item col-md-4 col-sm-6 col-xs-6">
                     <div class="product-block ">
-                      <div class="image"> <a href="product-detail-view.html"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="../product_images/{{$product->photo ? $product->photo->product_file : ''}}"></a> </div>
+                      <div class="image"> <a href="{{route('product.show', $product->id)}}"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="../product_images/{{$product->photo ? $product->photo->product_file : ''}}"></a>
+                      </div>
                       <div class="product-details">
                         <div class="product-name">
-                          <h4><a href="product-detail-view.html">{{$product->name}}</a></h4>
+                          <h4><input type="hidden" name="product_id" value="{{$product->id}}"><a href="{{route('product.show', $product->id)}}">{{$product->name}}</a></h4>
                         </div>
                         <div class="price">
-                         <span class="price-new">${{$product->price}}</span> 
+                         <input type="hidden" name="total_price" value="{{$product->price}}"><span class="price-new">${{$product->price}}</span> 
                        </div>
+                       <input type="hidden" name="qty" value="1">
                         <div class="product-hov">
                           <ul>
                             <li class="wish"><a href="#"></a></li>
-                            <li class="addtocart"><a href="#">Add to Cart</a> </li>
+                            <li class="addtocart">
+                              <div class="addtocart">
+                               {!!Form::submit('Add to Cart', ['style'=>'background-color:black'])!!}
+                              </div>
+                            </li>
                             <li class="compare"><a href="#"></a></li>
                           </ul>
                           <div class="review"> <span class="rate"> <i class="fa fa-star rated"></i> <i class="fa fa-star rated"></i> <i class="fa fa-star rated"></i> <i class="fa fa-star rated"></i> <i class="fa fa-star"></i> </span> </div>
@@ -184,6 +167,7 @@
                       </div>
                     </div>
                   </div>
+                  {!!Form::close()!!}
                 </li>
                  @endforeach
                  @endif

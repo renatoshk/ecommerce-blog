@@ -1,4 +1,4 @@
-@extends('layouts.blog-home')
+@extends('layouts.webi.index')
 @section ('content')
   
   <!-- offer block Start  -->
@@ -10,22 +10,28 @@
     </div>
   </div>
   <!-- offer block end  --> 
-  
+  <br>
+  @if ( Session::has('flash_message') )
+  <div class="alert {{ Session::get('flash_type', 'alert-danger') }}">
+      <h3>{{ Session::get('flash_message') }} <a href="/">Click here to continue shopping!</a></h3>
+  </div>
+@endif
+<br>
   <!-- bredcrumb and page title block start  -->
   <div id="bread-crumb">
     <div class="container">
       <div class="row">
         <div class="col-md-3 col-sm-3 col-xs-3">
           <div class="page-title">
-            <h4>Shoping Cart</h4>
+            <h2>Shoping Cart</h2>
           </div>
         </div>
         <div class="col-md-9 col-sm-9 col-xs-9">
           <div class="bread-crumb">
             <ul>
-              <li><a href="http://localhost/blog/public/index.php">home</a></li>
+              <li><a href="/">home</a></li>
               <li>\</li>
-              <li><a href="cart.html">cart</a></li>
+              <li><a href="/cart">cart</a></li>
             </ul>
           </div>
         </div>
@@ -42,65 +48,59 @@
           <div class="cart-content table-responsive">
             <table class="cart-table table-responsive" style="width:100%">
               <tbody>
+
                 <tr class="Cartproduct carttableheader">
                   <td style="width:15%"> Product</td>
                   <td style="width:45%">Details</td>
                   <td style="width:10%">QNT</td>
                   <td style="width:5%">Discount</td>
                   <td style="width:15%">Total</td>
-                  <td class="delete" style="width:10%">&nbsp;</td>
+                  <td class="update" style="width:10%">Update</td>
+                  <td class="delete" style="width:10%">Delete</td>
                 </tr>
+                @if($orders)
+                @foreach($orders as $order)
+                {!!Form::model($order, ['method'=>'PATCH', 'action'=>['OrderController@update', $order->id]])!!}
                 <tr class="Cartproduct">
-                  <td ><div class="image"><a href="product-details.html"><img alt="img" src="images/product/cart70x92.jpg"></a></div></td>
+                  <td ><div class="image"><a href="{{route('product.show', $order->product->id)}}"><img alt="img" src="../product_images/{{$order->product->photo->product_file}}"></a></div></td>
                   <td><div class="product-name">
-                      <h4><a href="product-detail-view.html">Black African Print Pencil Skirt </a></h4>
+                      <h4><a href="{{route('product.show', $order->product->id)}}">{{$order->product->name}}</a></h4>
                     </div>
                     <span class="size">24 x 2.3 M</span>
-                    <div class="price"><span>$8.80</span></div></td>
+                    <div class="price"><span>${{$order->total_price}}</span></div></td>
                   <td class="product-quantity"><div class="quantity">
-                      <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="cart" min="0" step="1">
+                      <input type="number" size="4" class="input-text qty text" title="Qty" value="{{$order->qty}}" name="qty" min="1" max="{{$order->product->qty}}" step="1">
                     </div></td>
                   <td>0</td>
-                  <td class="price">$300</td>
-                  <td class="delete"><a title="Delete"> <i class="glyphicon glyphicon-trash "></i></a></td>
+                  <input type="hidden" name="total_price" value="{{$order->total_price}}"><td class="price">${{$order->total_price}}</td>
+                  <td>
+                      <button class="update btn btn-default" type="submit"><i class="fa fa-undo"></i> &nbsp;Update cart
+                      </button>
+                  </td>
+                  {!!Form::close()!!}
+                  {!!Form::open(['method'=>'DELETE', 'action'=>['OrderController@destroy', $order->id]])!!}
+                  <td class="delete">
+                     <button class="delete btn btn-default"> 
+                       <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                  </td>
+                  {!!Form::close()!!}
                 </tr>
-                <tr class="Cartproduct">
-                  <td ><div class="image"><a href="product-details.html"><img alt="img" src="images/product/cart2-70x92.jpg"></a></div></td>
-                  <td><div class="product-name">
-                      <h4><a href="product-detail-view.html">Black African Print Pencil Skirt </a></h4>
-                    </div>
-                    <span class="size">24 x 2.3 M</span>
-                    <div class="price"><span>$8.80</span></div></td>
-                  <td class="product-quantity"><div class="quantity">
-                      <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="cart" min="0" step="1">
-                    </div></td>
-                  <td>0</td>
-                  <td class="price">$300</td>
-                  <td class="delete"><a title="Delete"> <i class="glyphicon glyphicon-trash"></i></a></td>
-                </tr>
-                <tr class="Cartproduct">
-                  <td ><div class="image"><a href="product-details.html"><img alt="img" src="images/product/car3-70x92.jpg"></a></div></td>
-                  <td><div class="product-name">
-                      <h4><a href="product-detail-view.html">Black African Print Pencil Skirt </a></h4>
-                    </div>
-                    <span class="size">24 x 2.3 M</span>
-                    <div class="price"><span>$8.80</span></div></td>
-                  <td class="product-quantity"><div class="quantity">
-                      <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="cart" min="0" step="1">
-                    </div></td>
-                  <td>0</td>
-                  <td class="price">$300</td>
-                  <td class="delete"><a title="Delete"> <i class="glyphicon glyphicon-trash "></i></a></td>
-                </tr>
+
+              @endforeach
+              @endif
+                
               </tbody>
             </table>
           </div>
           <div class="cart-bottom">
             <div class="box-footer">
-              <div class="pull-left"><a class="btn btn-default" href="index.html"> <i class="fa fa-arrow-left"></i> &nbsp; Continue shopping </a></div>
+              <div class="pull-left"><a class="btn btn-default" href="/"> <i class="fa fa-arrow-left"></i> &nbsp; Continue shopping </a></div>
               <div class="pull-right">
-                <button class="btn btn-default" type="submit"><i class="fa fa-undo"></i> &nbsp; Update cart</button>
+
+                 {{$orders->links()}}
               </div>
+
             </div>
           </div>
           <!-- left block end  --> 
@@ -119,23 +119,7 @@
                       <tbody>
                         <tr>
                           <td>Total products</td>
-                          <td class="price">$125.05</td>
-                        </tr>
-                        <tr>
-                          <td>Shipping</td>
-                          <td class="price"><span class="success">Free shipping!</span></td>
-                        </tr>
-                        <tr class="cart-total-price ">
-                          <td>Total (tax excl.)</td>
-                          <td class="price">$125.05</td>
-                        </tr>
-                        <tr>
-                          <td>Total tax</td>
-                          <td id="total-tax" class="price">$0.00</td>
-                        </tr>
-                        <tr>
-                          <td> Total</td>
-                          <td id="total-price">$125.05</td>
+                          <td class="price">${{$total_price}}</td>
                         </tr>
                         <tr>
                           <td colspan="2"><div class="input-append couponForm">
@@ -145,10 +129,11 @@
                         </tr>
                       </tbody>
                     </table>
+                   
                   </div>
                 </div>
               </div>
-              <div class="checkout"> <a href="checkout.html" title="checkout" class="btn btn-default ">Proceed to checkout</a> </div>
+              <div class="checkout"> <a href="{{route('checkout-step-1.index')}}" title="checkout" class="btn btn-default ">Proceed to checkout</a> </div>
             </div>
           </div>
           <!-- left block end  --> 

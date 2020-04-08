@@ -34,4 +34,5 @@ class Product extends Model
         return $this->belongsTo('App\Photo_products','image_id');
     }
 
+
 }

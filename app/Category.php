@@ -12,12 +12,4 @@ class Category extends Model
     public function products(){
     	return $this->hasMany('App\Product');
     } 
-
-    //lidhja me postimet
-    public function posts(){
-    	return $this->hasMany('App\Post');
-    }
-
-
-
 }

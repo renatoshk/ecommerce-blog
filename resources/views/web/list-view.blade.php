@@ -59,23 +59,32 @@
                 <ul class="title-toggle">
                   @if($prods)
                   @foreach($prods as $prod)
+                  {!!Form::open(['method'=>'POST', 'action'=>'OrderController@store'])!!}
                   <li>
                     <div class="product-block ">
                       <div class="item col-md-4 col-sm-4 col-xs-4">
-                        <div class="image"> <a href="product-detail-view.html"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="/product_images/{{$prod->photo ? $prod->photo->product_file : ''}}"></a> </div>
+                        <div class="image"> <a href="{{route('product.show', $prod->id)}}"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="/product_images/{{$prod->photo ? $prod->photo->product_file : ''}}"></a> </div>
                       </div>
                       <div class="item col-md-8 col-sm-8 col-xs-8">
                         <div class="product-details">
                           <div class="product-name">
-                            <h5><a href="product-detail-view.html">{{$prod->name}}</a></h5>
+                            <h5><input type="hidden" name="product_id" value="{{$prod->id}}"><a href="{{route('product.show', $prod->id)}}">{{$prod->name}}</a></h5>
                           </div>
                           <div class="review"></div>
-                          <div class="price"> <span class="price-new">${{$prod->price}}</span> </div>
-                          <div class="addto-cart"><a href="#">Add to Cart</a></div>
+                          <div class="price">
+                            <input type="hidden" name="total_price" value="{{$prod->price}}">
+                            <span class="price-new">${{$prod->price}}</span> 
+                          </div>
+                          <input type="hidden" name="qty" value="1">
+                           <div class="addto-cart">
+                             {!!Form::submit('Add to Cart', ['class'=>'btn btn-primary btn-sm'])!!}
+                          </div>
+                          <br>
                         </div>
                       </div>
                     </div>
                   </li>
+                    {!!Form::close()!!}
                   @endforeach
                 @endif
                 </ul>
@@ -134,25 +143,37 @@
               <ul>
                 @if($products)
                  @foreach($products as $product)
+                  {!!Form::open(['method'=>'POST', 'action'=>'OrderController@store'])!!}
                 <li>
                   <div class="product-block ">
                     <div class="item col-md-4 col-sm-6 col-xs-4">
-                      <div class="image"> <a href="product-detail-view.html"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="/product_images/{{$product->photo ? $product->photo->product_file : ''}}"></a> </div>
+                      <div class="image"> <a href="{{route('product.show', $product->id)}}"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="/product_images/{{$product->photo ? $product->photo->product_file : ''}}"></a> </div>
                     </div>
                     <div class="item col-md-8 col-sm-6 col-xs-8">
                       <div class="product-details">
                         <div class="product-name">
-                          <h4><a href="product-detail-view.html">{{$product->name}}</a></h4>
+                           <input type="hidden" name="product_id" value="{{$product->id}}">
+                          <h4><a href="{{route('product.show', $product->id)}}">{{$product->name}}</a></h4>
                         </div>
                         <div class="review"> <span class="rate"> <i class="fa fa-star rated"></i> <i class="fa fa-star rated"></i> <i class="fa fa-star rated"></i> <i class="fa fa-star rated"></i> <i class="fa fa-star"></i> </span> 1 Review(s) | Add Your Review </div>
-                        <div class="price"> <span class="price-new">${{$product->price}}</span> </div>
+                        <div class="price"> 
+                          <span class="price-new">
+                             <input type="hidden" name="total_price" value="{{$product->price}}">
+                                ${{$product->price}}
+                          </span> 
+                       </div>
                         <div class="product-discription">
                           <p>{{$product->description}}</p>
                         </div>
+                        <input type="hidden" name="qty" value="1">
                         <div class="product-hov">
                           <ul>
                             <li class="wish"><a href="#"></a></li>
-                            <li class="addtocart"><a href="#">Add to Cart</a> </li>
+                            <li>
+                              <div class="addtocart">
+                                  {!!Form::submit('Add to Cart', ['class'=>'form-control'])!!}
+                              </div>
+                            </li>
                             <li class="compare"><a href="#"></a></li>
                           </ul>
                         </div>
@@ -160,6 +181,7 @@
                     </div>
                   </div>
                 </li>
+                 {!!Form::close()!!}
                 @endforeach
                 @endif
               </ul>

@@ -15,7 +15,8 @@ class CreateUserCheckoutsTable extends Migration
     {
         Schema::create('user__checkouts', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('order_id')->unsigned()->index()->nullable();
+            $table->integer('user_id');
+            $table->string('order_id');
             $table->string('name');
             $table->string('surname');
             $table->string('email');
@@ -26,7 +27,7 @@ class CreateUserCheckoutsTable extends Migration
             $table->integer('phone_number');
             $table->string('additional_information');
             $table->timestamps();
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            
         });
     }
 

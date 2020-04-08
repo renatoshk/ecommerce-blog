@@ -10,7 +10,7 @@ use App\Role;
 use App\Photo_users;
 use App\Http\Requests\UserEditRequest;
 use App\Http\Requests\ChangePasswordRequest;
-
+use Illuminate\Support\Facades\Session;
 class ChangePasswordUsersController extends Controller
 {
     /**
@@ -85,9 +85,11 @@ class ChangePasswordUsersController extends Controller
             $user->password = Hash::make($request->password);
             $user->save();
             Auth::logout();
+            Session::flash('flash_message', 'Your password is changed! Login with your new password');
             return redirect('/');
         }
         else {
+             Session::flash('flash_message', 'Your password is not changed!Try again!');
             return redirect()->back();
         }
     }

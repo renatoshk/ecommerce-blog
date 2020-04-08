@@ -17,8 +17,17 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
+<br>
+<br>
+@if ( Session::has('flash_message') )
+  <div class="alert {{ Session::get('flash_type', 'alert-info') }}">
+      <h3>{{ Session::get('flash_message') }} <a href="{{route('products.index')}}">Click Here to see it!</a></h3>
+  </div>
+@endif
+<br>
+<br>
 <div class="col-sm3">
-    <img  src="/product_images/{{$product->photo ? $product->photo->product_file : 'No Photo'}}" alt="">
+    <img style="height:500px;" src="/product_images/{{$product->photo ? $product->photo->product_file : 'No Photo'}}" alt="">
 </div>
 <div class="col-sm-10">
 	{!!Form::model($product, ['method'=>'PATCH', 'action'=>['AdminProductController@update', $product->id],'files'=>true])!!}

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Comment;
+use App\Post;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\CommentRequest;
 class PostsCommentController extends Controller
 {
     /**
@@ -14,6 +17,8 @@ class PostsCommentController extends Controller
     public function index()
     {
         //
+        $comments = Comment::all();
+        return view('admin_web.comments.index', compact('comments'));
     }
 
     /**
@@ -32,9 +37,23 @@ class PostsCommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CommentRequest $request)
     {
         //
+          $user = Auth::user();
+         if($user){ 
+          $data = [
+            'post_id' =>$request->post_id,
+            'author'  =>$user->username,
+            'photo'   =>$user->photo? $user->photo->user_register_file : NULL,
+            'text'    =>$request->text
+         ];
+        Comment::create($data);
+        return redirect()->back();
+        }
+        else {
+            return redirect('/');
+        }
     }
 
     /**
@@ -46,6 +65,9 @@ class PostsCommentController extends Controller
     public function show($id)
     {
         //
+        $post = Post::findOrFail($id);
+        $comments = $post->comments;
+        return view('admin.comments.show', compact('comments'));
     }
 
     /**
@@ -69,6 +91,8 @@ class PostsCommentController extends Controller
     public function update(Request $request, $id)
     {
         //
+        Comment::findOrFail($id)->update($request->all());
+        return redirect()->back();
     }
 
     /**
@@ -80,5 +104,8 @@ class PostsCommentController extends Controller
     public function destroy($id)
     {
         //
+        Comment::findOrFail($id)->delete();
+        return redirect()->back();
     }
+
 }

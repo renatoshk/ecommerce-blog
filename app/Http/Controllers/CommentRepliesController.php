@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Http\Requests\ReplyCommentRequest;
+use App\Comment;
+use App\CommentReply;
 class CommentRepliesController extends Controller
 {
     /**
@@ -14,6 +16,7 @@ class CommentRepliesController extends Controller
     public function index()
     {
         //
+
     }
 
     /**
@@ -36,6 +39,19 @@ class CommentRepliesController extends Controller
     {
         //
     }
+    public function createReply(ReplyCommentRequest $request){
+        $user = Auth::user();
+        $data = [
+            'comment_id' =>$request->comment_id,
+            'author'  =>$user->name,
+            'email'   =>$user->email,
+            'photo'   =>$user->photo ? $user->photo->user_register_file : NULL,
+            'text'    =>$request->text
+         ];
+        CommentReply::create($data);
+        return redirect()->back();
+       
+    }
 
     /**
      * Display the specified resource.
@@ -46,6 +62,9 @@ class CommentRepliesController extends Controller
     public function show($id)
     {
         //
+        $comment = Comment::findOrFail($id);
+        $replies = $comment->replies;
+        return view('admin_web.comments.replies.show', compact('comment', 'replies'));
     }
 
     /**
@@ -69,6 +88,8 @@ class CommentRepliesController extends Controller
     public function update(Request $request, $id)
     {
         //
+        CommentReply::findOrFail($id)->update($request->all());
+        return redirect()->back();
     }
 
     /**
@@ -80,5 +101,7 @@ class CommentRepliesController extends Controller
     public function destroy($id)
     {
         //
+        CommentReply::findOrFail($id)->delete();
+        return redirect()->back();
     }
 }

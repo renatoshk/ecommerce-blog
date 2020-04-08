@@ -3,7 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Product;
+use App\Order;
+use App\User;
+use App\User_Checkout;
+use App\Shipping;
+use App\Payment;
+use App\Post;
+use App\Comment;
 class AdminController extends Controller
 {
     /**
@@ -13,7 +20,17 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin_web.dashboard');     
+        $products_available_count = Product::where('status', 'available')->count();
+        $products_unavailable_count = Product::where('status', 'unavailable')->count();
+        $cart_orders = Order::where('status', 'none')->count();
+        $purchased_orders = Order::where('status', 'purchase')->count();
+        $users = User::all();
+        $users_checkout = User_Checkout::all();
+        $shippings = Shipping::all();
+        $payments = Payment::all();
+        $posts = Post::all();
+        $comments  = Comment::all();
+        return view('admin_web.dashboard', compact('products_available_count', 'products_unavailable_count', 'cart_orders', 'purchased_orders', 'users', 'users_checkout', 'shippings', 'payments','posts', 'comments'));     
     }
 
     /**

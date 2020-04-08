@@ -9,7 +9,14 @@
     </div>
   </div>
   <!-- offer block end  --> 
-  
+  <br>
+  @if ( Session::has('flash_message') )
+  <div class="alert {{ Session::get('flash_type', 'alert-danger') }}">
+      <h3>{{ Session::get('flash_message') }}</h3>
+  </div>
+@endif
+  <br>
+
   <!-- bredcrumb and page title block start  -->
   <div id="bread-crumb">
     <div class="container">
@@ -22,11 +29,11 @@
         <div class="col-md-7 col-sm-7 col-xs-7">
           <div class="bread-crumb">
             <ul>
-              <li><a href="http://localhost/blog/public/index.php">home</a></li>
+              <li><a href="/">home</a></li>
               <li>\</li>
-              <li><a href="cart.html">cart</a></li>
+              <li><a href="/cart">cart</a></li>
               <li>\</li>
-              <li><a href="checkout-step1.html">Billing & Shipping Address</a></li>
+              <li><a href="/checkout-step-2">Billing & Shipping Address</a></li>
             </ul>
           </div>
         </div>
@@ -41,31 +48,31 @@
       <div class="account-content checkout-staps">
         <div class="account-content checkout-staps">
           <div class="staps">
-            <div class="row">
-              <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="checkout-stap active">
-                  <div class="title"> <span class="stap">1 </span><a href="checkout-step1.html">Billing &amp; Shipping Address</a></div>
-                </div>
+           <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="checkout-stap active">
+                <div class="title"> <span class="stap">1 </span><a href="/checkout-step-1">Billing &amp; Shipping Address</a></div>
               </div>
-              <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="checkout-stap">
-                  <div class="title"><span class="stap">2 </span><a href="checkout-step2.html">Shipping Method</a></div>
-                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="checkout-stap ">
+                <div class="title"><span class="stap">2 </span><a href="/checkout-step-2">Shipping Method</a></div>
               </div>
-              <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="checkout-stap ">
-                  <div class="title"><span class="stap">3 </span><a href="checkout-step3.html">Payment Method</a></div>
-                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="checkout-stap">
+                <div class="title"><span class="stap">3 </span><a href="/checkout-step-3">Confirm Order</a></div>
               </div>
-              <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="checkout-stap">
-                  <div class="title"><span class="stap">4 </span><a href="checkout-step4.html">Order</a></div>
-                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="checkout-stap ">
+                <div class="title"><span class="stap">4 </span><a href="/checkout-step-4">Payment</a></div>
               </div>
             </div>
           </div>
+          </div>
         </div>
-        <form class="billing-info">
+        {!!Form::open(['method'=>'POST', 'action'=>'UserCheckoutController@store'])!!}
           <div class="products-order checkout billing-information">
             <div class="checkbox">
               <label>
@@ -104,44 +111,39 @@
                 </table>
               </div>
             </div>
+
             <div class="row">
               <div class="col-md-6 col-sm-6">
                 <div class="input-group">
-                  <input type="text" required placeholder="First Name *" class="form-control">
+                  <input type="text" name="name" required placeholder="First Name *" class="form-control">
                 </div>
                 <div class="input-group">
-                  <input type="email" required placeholder="E-mail *" class="form-control">
-                </div>
-              </div>
-              <div class="col-md-6 col-sm-6">
-                <div class="input-group">
-                  <input type="text" required placeholder="Last Name *" class="form-control">
-                </div>
-                <div class="input-group">
-                  <input type="text" required placeholder="Company" class="form-control">
-                </div>
-              </div>
-              <div class="col-md-12 col-sm-12">
-                <div class="input-group">
-                  <input type="text" required placeholder="Address line1 *" class="form-control">
-                </div>
-                <div class="input-group">
-                  <input type="text" required placeholder="Address line2" class="form-control">
+                  <input type="email" name="email" required placeholder="E-mail *" class="form-control">
                 </div>
               </div>
               <div class="col-md-6 col-sm-6">
                 <div class="input-group">
-                  <input type="text" required placeholder="City *" class="form-control">
+                  <input type="text" name="surname" required placeholder="Last Name *" class="form-control">
+                </div>
+                <div class="input-group">
+                  <input type="text" name="address" required placeholder="Address line1 *" class="form-control">
+                </div>
+                
+              </div>
+              
+              <div class="col-md-6 col-sm-6">
+                <div class="input-group">
+                  <input type="text" name="city" required placeholder="City *" class="form-control">
                 </div>
               </div>
               <div class="col-md-6 col-sm-6">
                 <div class="input-group">
-                  <input type="text" required placeholder="ZIP / Postal Code *" class="form-control">
+                  <input type="text" name="zip_code" required placeholder="ZIP / Postal Code *" class="form-control">
                 </div>
               </div>
               <div class="col-md-6 col-sm-6">
                 <div class="input-group">
-                  <select class="form-control">
+                  <select name="country" class="form-control">
                     <option value="AF">Afghanistan</option>
                     <option value="AX">Åland Islands</option>
                     <option value="AL">Albania</option>
@@ -398,24 +400,22 @@
             <div class="row">
               <div class="col-md-6 col-sm-6">
                 <div class="input-group">
-                  <input type="text" required placeholder="Phone *" class="form-control">
+                  <input type="text" name="phone_number" required placeholder="Phone *" class="form-control">
                 </div>
               </div>
-              <div class="col-md-6 col-sm-6">
-                <div class="input-group">
-                  <input type="text" required placeholder="Fax" class="form-control">
-                </div>
               </div>
               <div class="col-md-12 col-sm-12">
                 <div class="input-group">
-                  <textarea placeholder="Additional information" id="textarea_message" name="contact-message" class="form-control"></textarea>
+                  <textarea placeholder="Additional information" id="textarea_message" name="additional_information" class="form-control"></textarea>
                 </div>
               </div>
-              <div class="col-md-12 col-sm-12"> <a class="btn btn-primary pull-right " href="checkout-step2.html">Continue</a> </div>
             </div>
           </div>
-        </form>
+            <div class="form-group">
+              <input  type="submit" name="submit" value="Continue" class="form-control btn btn-primary btn-sm">
+            </div>
+        {!!Form::close()!!}   
       </div>
     </div>
-  </div>
+  
 @stop

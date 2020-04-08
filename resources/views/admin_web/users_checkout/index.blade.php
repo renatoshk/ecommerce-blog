@@ -31,7 +31,7 @@
   <thead>
     <tr>
       <th scope="col">Id</th>
-      <th scope="col">Order</th>
+      <th scope="col">Orders ID</th>
       <th scope="col">Name</th>
       <th scope="col">Surname</th>
       <th scope="col">Email</th>
@@ -53,16 +53,16 @@
     @foreach($users_checkout as $user_checkout)	
     <tr>
       <td>{{$user_checkout->id}}</td>
-      <td>{{$user_checkout->order->id}}</td>
+      <td>{{$user_checkout->order_id}}</td>
       <td>{{$user_checkout->name}}</td>
       <td>{{$user_checkout->surname}}</td>
       <td>{{$user_checkout->email}}</td>
       <td>{{$user_checkout->address}}</td>
       <td>{{$user_checkout->country}}</td>
+      <td>{{$user_checkout->city}}</td>
       <td>{{$user_checkout->zip_code}}</td>
       <td>{{$user_checkout->phone_number}}</td>
       <td>{{$user_checkout->additional_information}}</td>
-      <td>{{$user_checkout->city}}</td>
       <td>{{$user_checkout->created_at ? $user_checkout->created_at->diffForHumans() : 'No data'}}</td>
       <td>{{$user_checkout->updated_at ? $user_checkout->updated_at->diffForHumans() : 'No data'}}</td>
       <td>

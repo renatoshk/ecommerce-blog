@@ -1,5 +1,59 @@
 @extends('layouts.webi.index')
+
+@section('header_cart')
+
+<div class="col-md-3 header-right">
+            <div class="cart">
+              
+              <div class="cart-icon dropdown"></div>
+              <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="{{route('cart')}}">My Cart( {{$orders_count }} )<span>${{$total_price}}</span></a>
+              <ul class="dropdown-menu pull-right cart-dropdown-menu">
+                <li>
+                  <table class="table table-striped">
+                    <tbody>
+                      @if($orders)
+                       @foreach($orders as $order)
+                      <tr>
+                        <td class="text-center"><a href="{{route('product.show', $order->product->id)}}"><img class="img-thumbnail" src="/product_images/{{$order->product->photo->product_file}}" alt="img"></a></td>
+                        <td class="text-left"><a href="{{route('product.show', $order->product->id)}}">{{$order->product->name}}</a></td>
+                        <td class="text-right quality">X1</td>
+                        <td class="text-right price-new">${{$order->total_price}}</td>
+                      </tr>
+                      @endforeach
+                        {{$orders->links()}}
+                     @endif
+                    </tbody>
+                  </table>
+                </li>
+                <li>
+                  <div class="minitotal">
+                    <table class="table pricetotal">
+                      <tbody>
+                        <tr>
+                          <td class="text-right"><strong>Sub-Total</strong></td>
+                          <td class="text-right price-new">${{$total_price}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class="controls"> <a class="btn btn-primary pull-left" href="{{route('cart')}}" id="view-cart"><i class="fa fa-shopping-cart"></i> View Cart </a> <a class="btn btn-primary pull-right" href="{{route('checkout-step-1.index')}}" id="checkout"><i class="fa fa-share"></i> Checkout</a> </div>
+                  </div>
+                </li>
+              </ul>
+           
+            </div>
+          </div>
+          
+
+@endsection
+
 @section('categories')
+<br>
+@if ( Session::has('flash_message') )
+  <div class="alert {{ Session::get('flash_type', 'alert-danger') }}">
+      <h3>{{ Session::get('flash_message') }}</h3>
+  </div>
+@endif
+<br>
 <div id="main-menu">
     <div class="container">
       <nav class="navbar navbar-default">
@@ -13,6 +67,7 @@
             <li><a href="{{route('category.show', $category->id)}}">{{$category->name}}</a></li>
               @endforeach
             @endif
+             <li><a href="{{route('blog.index')}}">Blog</a></li>
           </ul>
         </div>
       </nav>
@@ -79,7 +134,7 @@
                   <div class="image"> <a href="#"><img class="img-responsive" title="jeans" alt="jeans" src="frontend/images/product/pro4.png"></a> </div>
                   <div class="product-details">
                     <div class="product-name">
-                      <h3><a href="#">Cellphones</a></h3>
+                      <h3><a href="#">Tech</a></h3>
                     </div>
                   </div>
                 </div>
@@ -109,7 +164,7 @@
                   <div class="image"> <a href="#"><img class="img-responsive" title="pursh" alt="pursh" src="frontend/images/product/pro7.png"></a> </div>
                   <div class="product-details">
                     <div class="product-name">
-                      <h3><a href="#">Fashion </a></h3>
+                      <h3><a href="#">Fashion</a></h3>
                     </div>
                   </div>
                 </div>
@@ -176,20 +231,29 @@
           <div class= "customNavigation"> <a class="btn featured_prev prev"><i class="fa fa-angle-left"></i></a> <a class="btn featured_next next"><i class="fa fa-angle-right"></i></a> </div>
           <div class="box">
             <div id="featured-products" class="owl-carousel">
-                  @if($products)
-                   @foreach($products as $product)
+            @if($products)
+              @foreach($products as $product)
+              {!!Form::open(['method'=>'POST', 'action'=>'OrderController@store'])!!}
               <div class="item">
                 <div class="product-block ">
-                  <div class="image"> <a href="http://localhost/blog/public/product_detail"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="../product_images/{{$product->photo ? $product->photo->product_file : 'No Photo'}}"></a> </div>
+                  <div class="image"> <a href="{{route('product.show', $product->id)}}"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="../product_images/{{$product->photo ? $product->photo->product_file : 'No Photo'}}"></a> </div>
                   <div class="product-details">
                     <div class="product-name">
-                      <h3><a href="/product_detail">{{$product->name}}</a></h3>
+                      <input type="hidden" name="product_id" value="{{$product->id}}"><h3><a href="{{route('product.show', $product->id)}}">{{$product->name}}</a></h3>
                     </div>
-                    <div class="price"> <span class="price-old">$123.20</span> <span class="price-new">${{$product->price}}</span> </div>
+                    <div class="price"> 
+                         <input type="hidden" name="total_price" value="{{$product->price}}"> <span class="price-new">${{$product->price}}</span> 
+                    </div>
+                    <input type="hidden" name="qty" value="1">
                     <div class="product-hov">
                       <ul>
                         <li class="wish"><a href="#" ></a></li>
-                        <li class="addtocart"><a href="#" >Add to Cart</a> </li>
+                        <li>
+                           <div class="addtocart">
+                            {!!Form::submit('Add to Cart', ['style'=>'background-color:black'])!!}
+                          </div>
+                        </li> 
+                       {{--  <li class="addtocart"><input style="visibility:hidden; display: none;" type="submit" name="submit">Add to Cart</li> --}}
                         <li class="compare"><a href="#" ></a></li>
                       </ul>
                       <div class="review"> <span class="rate"> <i class="fa fa-star rated"></i> <i class="fa fa-star rated"></i> <i class="fa fa-star rated"></i> <i class="fa fa-star rated"></i> <i class="fa fa-star"></i> </span> </div>
@@ -197,6 +261,7 @@
                   </div>
                 </div>
               </div>
+              {!!Form::close()!!}
                   @endforeach
                   @endif
              
@@ -234,6 +299,7 @@
   <!-- CMS Banner & Video block End  --> 
   
   <!-- Latest News block Start  -->
+  
   <div id="blog">
     <div class="container">
       <div class="row">
@@ -243,76 +309,24 @@
           </div>
           <div class= "customNavigation"> <a class="btn Latest_prev prev"><i class="fa fa-angle-left"></i></a> <a class="btn Latest_next next"><i class="fa fa-angle-right"></i></a> </div>
           <div id="Latest-News" class="owl-carousel ">
+            @if($posts)
+             @foreach($posts as $post)
             <div class="item">
               <div class="post">
-                <div class="image"> <a href="http://localhost/blog/public/blog"><img src="frontend/images/blog4.jpg" alt="post" title="post" class="img-responsive"></a> </div>
+                <div class="image"> <a href="{{route('blog.edit', $post->id)}}"><img src="../posts_image/{{$post->photo->file}}" alt="post" title="post" class="img-responsive"></a> </div>
                 <div class="content-details">
                   <div class="post-title">
-                    <h3><a href="http://localhost/blog/public/blog">Image post contant wrider with exampler the ttis ant</a></h3>
+                    <h3><a href="{{route('blog.edit', $post->id)}}">{{$post->title}}</a></h3>
                   </div>
                   <div class="description">
-                    <p>This ante posuere ac Mauris non turpis eu metus congue metus sagittis metus Fusce at .</p>
-                    <div class="read-more"> <a class="read-more" href="http://localhost/blog/public/single_post">Read More..</a> </div>
+                    <p>{{ \Illuminate\Support\Str::limit($post->body, 500) }}</p>
+                    <div class="read-more"> <a class="read-more" href="{{route('blog.edit', $post->id)}}">Read More..</a> </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="item">
-              <div class="post">
-                <div class="image"> <a href="http://localhost/blog/public/blog"><img src="frontend/images/blog1.jpg" alt="post" title="post" class="img-responsive"></a> </div>
-                <div class="content-details">
-                  <div class="post-title">
-                    <h3><a href="http://localhost/blog/public/blog">Image post contant wrider with exampler the ttis ant</a></h3>
-                  </div>
-                  <div class="description">
-                    <p>This ante posuere ac Mauris non turpis eu metus congue metus sagittis metus Fusce at .</p>
-                    <div class="read-more"> <a class="read-more" href="http://localhost/blog/public/single_post">Read More..</a> </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="post">
-                <div class="image"> <a href="http://localhost/blog/public/blog"><img src="frontend/images/blog3.jpg" alt="post" title="post" class="img-responsive"></a> </div>
-                <div class="content-details">
-                  <div class="post-title">
-                    <h3><a href="http://localhost/blog/public/blog">Image post contant wrider with exampler the ttis ant</a></h3>
-                  </div>
-                  <div class="description">
-                    <p>This ante posuere ac Mauris non turpis eu metus congue metus sagittis metus Fusce at .</p>
-                    <div class="read-more"> <a class="read-more" href="http://localhost/blog/public/single_post">Read More..</a> </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="post">
-                <div class="image"> <a href="http://localhost/blog/public/blog"><img src="frontend/images/blog4.jpg" alt="post" title="post" class="img-responsive"></a> </div>
-                <div class="content-details">
-                  <div class="post-title">
-                    <h3><a href="http://localhost/blog/public/blog">Image post contant wrider with exampler the ttis ant</a></h3>
-                  </div>
-                  <div class="description">
-                    <p>This ante posuere ac Mauris non turpis eu metus congue metus sagittis metus Fusce at .</p>
-                    <div class="read-more"> <a class="read-more" href="http://localhost/blog/public/single_post">Read More..</a> </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="post">
-                <div class="image"> <a href="http://localhost/blog/public/blog"><img src="frontend/images/blog5.jpg" alt="post" title="post" class="img-responsive"></a> </div>
-                <div class="content-details">
-                  <div class="post-title">
-                    <h3><a href="http://localhost/blog/public/blog">Image post contant wrider with exampler the ttis ant</a></h3>
-                  </div>
-                  <div class="description">
-                    <p>This ante posuere ac Mauris non turpis eu metus congue metus sagittis metus Fusce at .</p>
-                    <div class="read-more"> <a class="read-more" href="http://localhost/blog/public/single_post">Read More..</a> </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+           @endforeach
+           @endif
           </div>
         </div>
         <div class="col-md-3 special">

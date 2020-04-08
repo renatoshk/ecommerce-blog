@@ -50,6 +50,9 @@ class User extends Authenticatable
     public function products(){
         return $this->hasMany('App\Product');
     }
+    public function orders(){
+        return $this->hasMany('App\Order');
+    }
     public function isAdmin(){
         if($this->role->role == "admin" && $this->is_active == 1){
             return true;
@@ -58,5 +61,14 @@ class User extends Authenticatable
             return false;
         }
     }
+    public function user_checkouts(){
+        return $this->hasMany('App\User_Checkout');
+    } 
+     public function payments(){
+        return $this->hasMany('App\Payment');
+    }
 
+    public function shippings(){
+        return $this->hasMany('App\Shipping');
+    }
 }

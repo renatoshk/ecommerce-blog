@@ -17,6 +17,13 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
+    <br>
+    @if ( Session::has('flash_message') )
+      <div class="alert {{ Session::get('flash_type', 'alert-danger') }}">
+          <h3>{{ Session::get('flash_message') }}</h3>
+      </div>
+   @endif
+    <br> 
    <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">

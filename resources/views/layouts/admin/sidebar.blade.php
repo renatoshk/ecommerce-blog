@@ -22,7 +22,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
                 <li class="nav-item has-treeview menu-open">
-                    <a href="#" class="nav-link active">
+                    <a href="/adm" class="nav-link active">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -39,9 +39,17 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('orders.index')}}" class="nav-link">
+                            <a href="{{route('order.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Orders</p>
+                                <p>Pending Orders</p>
+                            </a>
+                        </li>
+                    </ul>
+                     <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('purchase')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Purchase Orders</p>
                             </a>
                         </li>
                     </ul>
@@ -60,6 +68,12 @@
                             <a href="{{route('categories.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Categories</p>
+                            </a>
+                        </li>
+                          <li class="nav-item">
+                            <a href="{{route('postcategories.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p> Posts Categories</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -86,6 +100,22 @@
                             </a>
                         </li>
                     </ul>
+                     <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('shipping.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Shippings Customers</p>
+                            </a>
+                        </li>
+                    </ul>
+                     <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('payments.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p> Customer Payments</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
@@ -100,6 +130,12 @@
                             <a href="{{route('posts.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Posts</p>
+                            </a>
+                        </li>
+                         <li class="nav-item">
+                            <a href="{{route('comments.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Comments</p>
                             </a>
                         </li>
                         <li class="nav-item">

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
-
+use Illuminate\Support\Facades\Session;
 class AdminCategoriesController extends Controller
 {
     /**
@@ -42,7 +42,8 @@ class AdminCategoriesController extends Controller
     {
         //
         Category::create($request->all());
-        return redirect('adm/categories'); 
+        Session::flash('flash_message', 'The Category has been created!');
+        return redirect()->back();
         
     }
 
@@ -82,7 +83,8 @@ class AdminCategoriesController extends Controller
         //
         $cat_update = Category::findOrFail($id);
         $cat_update->update($request->all());
-        return redirect('adm/categories');
+         Session::flash('flash_message', 'The Category has been updated!');
+        return redirect()->back();
     }
 
     /**
@@ -95,6 +97,7 @@ class AdminCategoriesController extends Controller
     {
         //
         $cat_destroy = Category::findOrFail($id)->delete();
-        return redirect('adm/categories'); 
+        Session::flash('flash_message', 'The Category has been deleted!');
+        return redirect()->back(); 
     }
 }

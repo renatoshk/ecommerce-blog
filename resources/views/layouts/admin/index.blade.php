@@ -32,7 +32,7 @@
     	@include('layouts.admin.navbar')
 		@include('layouts.admin.sidebar')
 		@yield('content')
-  
+         
 		<footer class="main-footer">
 		    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
 		    All rights reserved.
@@ -48,9 +48,13 @@
     <script src="{{asset('admin/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
     <script src="{{asset('admin/plugins/datatables/jquery.dataTables.js')}}"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+      @yield('scripts')
     <script>
     $.widget.bridge('uibutton', $.ui.button)
     </script>
+    
+
+
     <!-- Bootstrap 4 -->
     <script src="{{asset('admin/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <!-- ChartJS -->
@@ -77,6 +81,7 @@
     <script src="{{asset('admin/dist/js/demo.js')}}"></script>
     <script src="{{asset('admin/plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
     <script src="{{asset('admin/custom/index.js')}}"></script>
+
 </body>
 
 </html>

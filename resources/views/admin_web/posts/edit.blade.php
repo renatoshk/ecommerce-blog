@@ -17,7 +17,13 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
+    <br>
+    @if ( Session::has('flash_message') )
+      <div class="alert {{ Session::get('flash_type', 'alert-info') }}">
+          <h3>{{ Session::get('flash_message') }} <a href="{{route('posts.index')}}">Click Here to see it!</a></h3>
+      </div>
+   @endif
+    <br> 
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -31,7 +37,7 @@
 <br>
 <br>
 <div class="col-sm-10">
-<img  src="/posts_image/{{$post->photo ? $post->photo->file : 'No Photo'}}" alt=""></td>
+<img style="height:500px;" src="/posts_image/{{$post->photo ? $post->photo->file : 'No Photo'}}" alt=""></td>
   </div>
 <div class="col-sm-10">
 	{!!Form::model($post, ['method'=>'PATCH', 'action'=>['AdminPostsController@update', $post->id],'files'=>'true']) !!}

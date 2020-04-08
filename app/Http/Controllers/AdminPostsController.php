@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Photo_post;
 use App\User;
-use App\Category;
+use App\PostCategory;
 use App\Http\Requests\PostRequest;
 use App\Http\Requests\EditPostRequest;
-
+use Illuminate\Support\Facades\Session;
 class AdminPostsController extends Controller
 {
     /**
@@ -32,7 +32,7 @@ class AdminPostsController extends Controller
     public function create()
     {
         //
-        $categories = Category::pluck('name', 'id')->all();
+        $categories = PostCategory::pluck('name', 'id')->all();
         return view('admin_web.posts.create', compact('categories'));
     }
 
@@ -54,7 +54,8 @@ class AdminPostsController extends Controller
             $inputPost['photo_id'] = $photo->id;
         }
         $user->posts()->create($inputPost);
-        return redirect('/adm/posts');
+        Session::flash('flash_message', 'The Post has been created!');
+        return redirect()->back();
     }
 
     /**
@@ -79,7 +80,7 @@ class AdminPostsController extends Controller
     {
         //
        $post = Post::findOrFail($id);
-       $categories = Category::pluck('name', 'id')->all();
+       $categories = PostCategory::pluck('name', 'id')->all();
        return view('admin_web.posts.edit', compact('post', 'categories'));
     }
 
@@ -103,7 +104,8 @@ class AdminPostsController extends Controller
         }
         Auth::user()->posts()->whereId($id)->first()->update($inputPost);
      
-        return redirect('/adm/posts');
+        Session::flash('flash_message', 'The Post has been updated!');
+        return redirect()->back();
 
     }
 
@@ -117,6 +119,7 @@ class AdminPostsController extends Controller
     {
         //
      Post::findOrFail($id)->delete();
-      return redirect('/adm/posts');
+      Session::flash('flash_message', 'The Post has been deleted!');
+      return redirect()->back();
     }
 }

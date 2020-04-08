@@ -22,9 +22,9 @@
         <div class="col-md-9 col-sm-9 col-xs-9">
           <div class="bread-crumb">
             <ul>
-              <li><a href="http://localhost/blog/public/index.php">home</a></li>
+              <li><a href="/">home</a></li>
               <li>\</li>
-              <li><a href="http://localhost/blog/public/blog">blog</a></li>
+              <li><a href="/">blog</a></li>
             </ul>
           </div>
         </div>
@@ -41,121 +41,96 @@
           <!-- left block Start  -->
           <div id="left">
             <div class="single-post-item">
-              <div class="post-image"> <a href="#"><img src="frontend/images/blog1.jpg" alt=""></a> </div>
+              <div class="post-image"><img src="../../posts_image/{{$post->photo->file}}" alt=""></div>
               <div class="single-post-details">
                 <div class="post-title">
-                  <h4><a href="#">Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure
-                    Virginia, looked up one of the more</a></h4>
+                  <h4>{{$post->title}}</h4>
                 </div>
                 <div class="description">
-                  <p>make a type specimen book. It has survived not only five centuries, but also the leap into electronic type setting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset ators on the Internet tend to repeat predefined chunks as necessary, making </p>
+                  <p>{{$post->body}} </p>
                   <br>
-                  <p>make a type specimen book. It has survived not only five centuries, but also the leap into electronic typese tting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset ators on the Internet tend to repeat predefined chunks as necessary, making make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset ators on the Internet tend to repeat predefined chunks as necessary, making make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesettingrepeat predefined chunks as necessary, making </p>
                   <div class="post-meta">
                     <div class="chat"> <a href="#"> <i class="fa fa-comment"></i> <span class="chat-number">324</span> </a> </div>
-                    <div class="date"> <span class="date-month">Jan</span> <span class="date-day">16</span> <span class="date-year">2015</span> </div>
+                    <div class="date"> <span class="date-month">{{$post->created_at ? $post->created_at->diffForHumans() : 'No data'}}</span> </div>
                     <div class="comments"> <a href="#"> <i class="fa fa-share"></i> <span class="comments-number">324</span> </a> </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="navigation">
-              <div class="pull-left"> <a href="#" title="previous">Previous Post</a> </div>
-              <div class="pull-right"> <a href="#" title="next">Next Post</a> </div>
-            </div>
+           
             <div class="comments-area">
-              <h4>Comments<span>(2)</span></h4>
+              <h4>Comments<span>({{count($comments)}})</span></h4>
+                  @if(Auth::user())
+                    @if($comments)
+                       @foreach($comments as $comment)
+                 
               <ul class="comment-list ">
+
                 <li>
-                  <div class="comment-user"> <img src="frontend/images/comment-user.jpg" alt="further"> </div>
+                  <div class="comment-user"> <img src="/images/{{$comment->photo}}" alt="author"> </div>
                   <div class="comment-detail">
-                    <h6>John Doe</h6>
+                    <h6>{{$comment->author}}</h6>
                     <div class="post-info">
                       <ul>
-                        <li>Fab 11, 2016</li>
+                        <li>{{$comment->created_at ?$comment->created_at->diffForHumans() :'' }}</li>
                         <li><a href="#"><i class="fa fa-reply"></i>Reply</a></li>
                       </ul>
                     </div>
-                    <p>Consectetur adipiscing elit integer sit amet augue laoreet maximus nuncac.</p>
+                    <p>{{$comment->text}}</p>
                   </div>
                   <ul class="comment-list child-comment">
+                   @if($comment->replies)
+                   @foreach($comment->replies as $reply)
                     <li>
-                      <div class="comment-user"> <img src="frontend/images/comment-user.jpg" alt="further"> </div>
+                      <div class="comment-user"> <img src="/images/{{$reply->comment->photo}}" alt="further"> </div>
                       <div class="comment-detail">
-                        <h6>John Doe</h6>
+                        <h6>{{$reply->name}}</h6>
                         <div class="post-info">
                           <ul>
-                            <li>Fab 11, 2016</li>
+                            <li>{{$reply->created_at ? $reply->created_at->diffForHumans() : ''}}</li>
                             <li><a href="#"><i class="fa fa-reply"></i>Reply</a></li>
                           </ul>
                         </div>
                         <p>Consectetur adipiscing elit integer sit amet augue laoreet maximus nuncac.</p>
                       </div>
                     </li>
-                    <li>
-                      <div class="comment-user"> <img src="frontend/images/comment-user.jpg" alt="further"> </div>
-                      <div class="comment-detail">
-                        <h6>John Doe</h6>
-                        <div class="post-info">
-                          <ul>
-                            <li>Fab 11, 2016</li>
-                            <li><a href="#"><i class="fa fa-reply"></i>Reply</a></li>
-                          </ul>
-                        </div>
-                        <p>Consectetur adipiscing elit integer sit amet augue laoreet maximus nuncac.</p>
-                      </div>
-                    </li>
+                   
+                  @endforeach
+                  @endif
                   </ul>
                 </li>
-                <li>
-                  <div class="comment-user"> <img src="frontend/images/comment-user.jpg" alt="further"> </div>
-                  <div class="comment-detail">
-                    <h6>John Doe</h6>
-                    <div class="post-info">
-                      <ul>
-                        <li>Fab 11, 2016</li>
-                        <li><a href="#"><i class="fa fa-reply"></i>Reply</a></li>
-                      </ul>
-                    </div>
-                    <p>Consectetur adipiscing elit integer sit amet augue laoreet maximus nuncac.</p>
-                  </div>
-                </li>
+               
               </ul>
+                     @endforeach
+                  @endif
             </div>
             <div class="reply">
               <div class="Reply -title">
-                <h4 class="tf">Leave a Reply </h4>
+                <h4 class="tf">Leave a Comment </h4>
               </div>
-              <form>
+              {!!Form::open(['method'=>'POST', 'action'=>'PostsCommentController@store'])!!}
                 <div class="row">
+                  <input type="hidden" name="post_id" value="{{$post->id}}">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <textarea placeholder="Comment *" id="textarea_message" name="contact-message" class="form-control"></textarea>
+                      <textarea placeholder="Comment *" id="textarea_message" name="text" class="form-control"></textarea>
                     </div>
                   </div>
-                  <div class="col-md-7 col-sm-12">
-                    <div class="input-group">
-                      <input type="text" required placeholder="Name * " class="form-control" >
-                    </div>
-                    <!-- /input-group -->
-                    <div class="input-group">
-                      <input type="email" required placeholder="e-mail *" class="form-control">
-                    </div>
-                    <!-- /input-group -->
-                    <div class="input-group">
-                      <input type="text" placeholder="Your website" class="form-control">
-                    </div>
                     <!-- /input-group -->
                     <div class="btn btn-large btn-primary">
                       <input type="submit" value="Post" name="submit">
                     </div>
-                  </div>
+                 
                 </div>
-              </form>
+              {!!Form::close()!!}
+                @endif
             </div>
           </div>
           <!-- left block end  --> 
         </div>
+
+
+
         <div class="col-md-3 col-sm-4"> 
           <!-- right block Start  -->
           <div id="right">
@@ -164,94 +139,39 @@
                 <h4> Categories </h4>
               </div>
               <ul class="title-toggle">
-                <li><a href="http://localhost/blog/public/blog">Photoshop (10)</a></li>
-                <li><a href="http://localhost/blog/public/blog">WordPress (4)</a></li>
-                <li><a href="http://localhost/blog/public/blog">Core PHP (5)</a></li>
-                <li><a href="http://localhost/blog/public/blog">Graphic Design (15)</a></li>
-                <li><a href="http://localhost/blog/public/blog">e-Commerce Developars (3)</a></li>
-                <li><a href="http://localhost/blog/public/blog">Android Dev (7)</a></li>
-                <li><a href="http://localhost/blog/public/blog">Web Designing (9)</a></li>
+                @if($categories)
+                 @foreach($categories as $category)
+                <li><a href="{{route('blog.show',$category->id)}}">{{$category->name}}</a></li>
+                @endforeach
+               @endif 
               </ul>
             </div>
-            <div class="sidebar-widget">
-              <div class="sidebar-title">
-                <h4>Tags</h4>
-              </div>
-              <ul class="tagcloud title-toggle">
-                <li><a href="#">gallery</a></li>
-                <li><a href="#">grid</a></li>
-                <li><a href="#">large</a></li>
-                <li><a href="#">quote</a></li>
-                <li><a href="#">personal</a></li>
-                <li><a href="#">simple</a></li>
-                <li><a href="#">Wedding</a></li>
-                <li><a href="#">slider</a></li>
-                <li><a href="#">trending</a></li>
-                <li><a href="#">youtube</a></li>
-              </ul>
-            </div>
+           
             <div class="sidebar-widget latest-blog">
               <div class="sidebar-title">
                 <h4>Latest blog</h4>
               </div>
               <ul class="title-toggle">
+                @if($latest_blogs)
+                @foreach($latest_blogs as $latest_blog)
                 <li>
                   <div class="blog-post ">
                     <div class="item col-md-4">
-                      <div class="image"><a href="blog.html"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="images/blog2.jpg"></a> </div>
+                      <div class="image"><a href="{{route('blog.edit', $latest_blog->id)}}"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="../../posts_image/{{$latest_blog->photo->file}}"></a> </div>
                     </div>
                     <div class="item col-md-8">
                       <div class="blog-details">
                         <div class="blog-name">
-                          <h5><a href="blog.html">Black African Print Pencil Skirt </a></h5>
-                          <span class="blog-date">06/07/2015</span> </div>
+                          <h5><a href="{{route('blog.edit', $latest_blog->id)}}">{{$latest_blog->title}} </a></h5>
+                          <span class="blog-date">{{$latest_blog->created_at ? $latest_blog->created_at->diffForHumans() : ''}}</span> </div>
                       </div>
                     </div>
                   </div>
                 </li>
-                <li>
-                  <div class="blog-post ">
-                    <div class="item col-md-4">
-                      <div class="image"><a href="blog.html"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="images/blog3.jpg"></a> </div>
-                    </div>
-                    <div class="item col-md-8">
-                      <div class="blog-details">
-                        <div class="blog-name">
-                          <h5><a href="blog.html">Black African Print Pencil Skirt </a></h5>
-                          <span class="blog-date">06/07/2015</span> </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="blog-post ">
-                    <div class="item col-md-4">
-                      <div class="image"><a href="http://localhost/blog/public/blog"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="images/blog5.jpg"></a> </div>
-                    </div>
-                    <div class="item col-md-8">
-                      <div class="blog-details">
-                        <div class="blog-name">
-                          <h5><a href="http://localhost/blog/public/blog">Black African Print Pencil Skirt </a></h5>
-                          <span class="blog-date">06/07/2015</span> </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="blog-post ">
-                    <div class="item col-md-4">
-                      <div class="image"><a href="http://localhost/blog/public/blog"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="images/blog4.jpg"></a> </div>
-                    </div>
-                    <div class="item col-md-8">
-                      <div class="blog-details">
-                        <div class="blog-name">
-                          <h5><a href="http://localhost/blog/public/blog">Black African Print Pencil Skirt </a></h5>
-                          <span class="blog-date">06/07/2015</span> </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
+               @endforeach
+               @endif
               </ul>
+               {{$latest_blogs->links()}}
             </div>
           </div>
           

@@ -7,6 +7,7 @@ use App\User;
 use App\Role;
 use App\Photo_users;
 use App\Http\Requests\UserEditRequest;
+use Illuminate\Support\Facades\Session;
 class ProfileController extends Controller
 {
     /**
@@ -17,8 +18,6 @@ class ProfileController extends Controller
     public function index()
     {
         //
-     
-
         return view('web.profile.index');
     }
 
@@ -86,7 +85,8 @@ class ProfileController extends Controller
             $input['photo_id'] = $photo->id;
         }
         $user->update($input);
-        return redirect('/profile');
+        Session::flash('flash_message', 'Your account is updated!');
+        return redirect()->back();
     }
 
     /**
@@ -99,6 +99,7 @@ class ProfileController extends Controller
     {
         //
          $user = User::findOrFail($id)->delete();
+         Session::flash('flash_message', 'Your account is deleted!');
         return redirect('/');
     }
 }

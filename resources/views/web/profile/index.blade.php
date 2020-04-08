@@ -11,6 +11,13 @@ body {
   background: red;
 }
 </style>
+<br>
+@if ( Session::has('flash_message') )
+  <div class="alert {{ Session::get('flash_type', 'alert-danger') }}">
+      <h3>{{ Session::get('flash_message') }}</h3>
+  </div>
+@endif
+<br>
 <div class="container">
     <div class="row profile">
 		<div class="col-md-3">
@@ -40,9 +47,9 @@ body {
 				<div class="profile-usermenu">
 					<ul class="nav">
 						<li class="active">
-							<a href="{{route('profile')}}">
+							<a href="{{route('orders.index')}}">
 							<i class="glyphicon glyphicon-home"></i>
-							Overview </a>
+							My Orders </a>
 						</li>
 						<li>
 							<a href="{{route('change_password.edit', Auth::user()->id)}}">
@@ -64,14 +71,49 @@ body {
 				<!-- END MENU -->
 			</div>
 		</div>
-		<div class="col-md-9">
-            <div class="profile-content">
-            	My ORDERS
-
-             </div>
+	<div class="col-md-9">
+     <div class="profile-content">
+      <h1>My Purchases Products</h1> 
+      <br>
+      <br>
+	    <section class="content">
+		  <div class="row">
+		    <div class="col-12">
+		    <div class="card">
+		    <!-- /.card-header -->
+		    <div class="card-body">
+             <table id="categories" class="table table-bordered table-striped">
+				<thead>
+			        <tr>
+			          <th scope="col">Product</th>
+			          <th scope="col">Status</th>
+			          <th scope="col">Quantity</th>
+			          <th scope="col">Total Price</th>
+			         
+			        </tr>
+				</thead>
+				<tbody>
+				  @if($orders) 	
+				    @foreach($orders as $order)	
+				    <tr>
+				      <td>{{$order->product ? $order->product->name : 'Uncategorized'}}</td>
+				      <td>{{$order->status}}</td>
+				      <td>{{$order->qty}}</td>
+				      <td>${{$order->total_price}}</td>
+				    </tr>
+				   @endforeach
+				  @endif 
+				</tbody>
+			</table>
+           </div>
 		</div>
-	</div>
+	  </div>
+     </div>
+     {{$orders->links()}}
+   </section>
+  </div>
+ </div>
+ </div>
 </div>
-<br>
-<br>
+
 @stop

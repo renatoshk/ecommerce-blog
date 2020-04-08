@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Shipping_method;
 use App\Http\Requests\ShippingMethodRequest;
-
+use Illuminate\Support\Facades\Session;
 
 class AdminShippingMethodsController extends Controller
 {
@@ -44,7 +44,8 @@ class AdminShippingMethodsController extends Controller
         //
         $input = $request->all();
         Shipping_method::create($input);
-        return redirect('/adm/shippings');
+        Session::flash('flash_message', 'The Shipping Method has been created!');
+        return redirect()->back();
     }
 
     /**
@@ -85,7 +86,8 @@ class AdminShippingMethodsController extends Controller
         $shipping = Shipping_method::findOrFail($id);
         $input = $request->all();
         $shipping->update($input);
-        return redirect('/adm/shippings');
+        Session::flash('flash_message', 'The Shipping Method has been updated!');
+        return redirect()->back();
 
     }
 
@@ -99,6 +101,7 @@ class AdminShippingMethodsController extends Controller
     {
         //
         $shipping = Shipping_method::findOrFail($id)->delete();
-        return redirect('/adm/shippings');
+         Session::flash('flash_message', 'The Shipping Method has been deleted!');
+        return redirect()->back();
     }
 }
