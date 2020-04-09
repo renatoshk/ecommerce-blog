@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->integer('user_id');
             $table->integer('product_id')->unsigned()->index()->nullable();
             $table->string('status')->default('none');
-            $table->integer('quantity');
+            $table->integer('qty');
             $table->float('total_price');
             $table->timestamps();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');

@@ -44,22 +44,22 @@
             <div class="post-item">
               <div class="row">
                 <div class="col-md-5">
-                  <div class="post-image"> <a href="{{route('blog.edit', $post->id)}}"><img src="../posts_image/{{$post->photo->file}}" alt=""></a> </div>
+                  <div class="post-image"> <a href="{{route('blog.edit', $post->slug)}}"><img src="../posts_image/{{$post->photo->file}}" alt=""></a> </div>
                 </div>
                 <div class="col-md-7">
                   <div class="content-details">
                     <div class="post-title">
-                      <h3><a href="{{route('blog.edit', $post->id)}}">{{$post->title}}</a></h3>
+                      <h3><a href="{{route('blog.edit', $post->slug)}}">{{$post->title}}</a></h3>
                     </div>
                     <br>  
                     <div class="description">
-                      <p>{{ \Illuminate\Support\Str::limit($post->body, 500) }}</p>
+                      <p>{!!\Illuminate\Support\Str::limit($post->body, 100) !!}</p>
                       <div class="post-meta">
                         <div class="chat"><a href="#"><i class="fa fa-comment"></i><span class="chat-number"> 324</span></a> </div>
                         <div class="date"><span class="date-month">Jan</span><span class="date-day"> 16</span><span class="date-year">2015</span> </div>
                         <div class="comments"><a href="#"><i class="fa fa-share"></i><span class="comments-number"> 324</span></a></div>
                       </div>
-                      <div class="read-more"> <a href="{{route('blog.edit', $post->id)}}" class="read-more">read more <i class="fa fa-long-arrow-right"></i></a> </div>
+                      <div class="read-more"> <a href="{{route('blog.edit', $post->slug)}}" class="read-more">read more <i class="fa fa-long-arrow-right"></i></a> </div>
                     </div>
                   </div>
                 </div>
@@ -68,10 +68,10 @@
            @endforeach
            @endif
             </div>
-            {{$posts->links()}}
           </div>
         </div>
         <!-- left block end  --> 
+            {{$posts->links()}}
         
         <!-- right block Start  -->
         <div class="col-md-3">
@@ -99,12 +99,12 @@
                 <li>
                   <div class="blog-post ">
                     <div class="item col-md-4 col-xs-4">
-                      <div class="image"><a href="{{route('blog.edit', $latest_blog->id)}}"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="../posts_image/{{$latest_blog->photo->file}}"></a> </div>
+                      <div class="image"><a href="{{route('blog.edit', $latest_blog->slug)}}"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="../posts_image/{{$latest_blog->photo->file}}"></a> </div>
                     </div>
                     <div class="item col-md-8 col-xs-8">
                       <div class="blog-details">
                         <div class="blog-name">
-                          <h5><a href="blog.html">{{$latest_blog->title}}</a></h5>
+                          <h5><a href="{{route('blog.edit', $latest_blog->slug)}}">{{$latest_blog->title}}</a></h5>
                           <span class="blog-date">{{$latest_blog->created_at ? $latest_blog->created_at->diffForHumans() : 'No data'}}</span> </div>
                       </div>
                     </div>
@@ -113,13 +113,11 @@
                 @endforeach
                 @endif
               </ul>
-              {{$latest_blogs->links()}}
             </div>
           </div>
         </div>
         <!-- left block end  --> 
       </div>
     </div>
-  </div>
   
 @stop

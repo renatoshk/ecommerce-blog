@@ -234,6 +234,34 @@ body {
               <a href="{{route('comments.index')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
+           <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3>{{count($categories)}}</h3>
+
+                <p>Product Categories</p>
+              </div>
+              <div class="icon">
+                <i class="ion-chatboxes"></i>
+              </div>
+              <a href="{{route('categories.index')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+           <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-secondary">
+              <div class="inner">
+                <h3>{{count($post_categories)}}</h3>
+
+                <p>Posts Categories</p>
+              </div>
+              <div class="icon">
+                <i class="ion-chatboxes"></i>
+              </div>
+              <a href="{{route('postcategories.index')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
         </div>
     <!-- /.content -->
     <br>

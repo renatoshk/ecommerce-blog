@@ -25,6 +25,9 @@ class ShippingMethodRequest extends FormRequest
     {
         return [
             //
+            'method_name'=>'required',
+            'duration'=>'required',
+            'price'=>'required'
         ];
     }
 }

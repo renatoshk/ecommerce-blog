@@ -19,8 +19,8 @@ class CategoriesController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $products = Product::all();
-        $posts = Post::all();
+        $products = Product::where('status', 'available')->get();
+        $posts = Post::orderBy('created_at')->take(3)->get();
         $user = Auth::user();
         $total_price = 0;
         $orders_count = 0;
@@ -68,7 +68,7 @@ class CategoriesController extends Controller
         $cats = Category::all();
         $prods = Product::orderBy('created_at', 'DESC')->take(3)->get();
         $categories = Category::findOrFail($id);
-        $products = Product::orderBy('created_at', 'DESC')->where('category_id', $id)->paginate(3);
+        $products = Product::orderBy('created_at', 'DESC')->where('status', 'available')->where('category_id', $id)->paginate(3);
         return view('web.grid-view', compact('categories', 'products', 'cats', 'prods'));
     }
 
@@ -110,9 +110,9 @@ class CategoriesController extends Controller
     public function show_list($id){
         //
         $cats = Category::all();
-        $prods = Product::orderBy('created_at', 'DESC')->take(3)->get();
+        $prods = Product::orderBy('created_at', 'DESC')->where('status', 'available')->take(3)->get();
         $categories = Category::findOrFail($id);
-        $products = Product::orderBy('created_at', 'DESC')->where('category_id', $id)->paginate(3);
+        $products = Product::orderBy('created_at', 'DESC')->where('status', 'available')->where('category_id', $id)->paginate(3);
         return view('web.list-view', compact('categories', 'products', 'cats', 'prods'));
     }
 

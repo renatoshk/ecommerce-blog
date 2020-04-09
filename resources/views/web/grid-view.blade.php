@@ -62,13 +62,13 @@
                        {!!Form::open(['method'=>'POST', 'action'=>'OrderController@store'])!!}
                     <div class="product-block ">
                       <div class="item col-md-4 col-sm-4 col-xs-4">
-                        <div class="image"> <a href="{{route('product.show', $prod->id)}}"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="../product_images/{{$prod->photo ? $prod->photo->product_file : ''}}"></a>
+                        <div class="image"> <a href="{{route('product.show', $prod->slug)}}"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="../product_images/{{$prod->photo ? $prod->photo->product_file : ''}}"></a>
                         </div>
                       </div>
                       <div class="item col-md-8 col-sm-8 col-xs-8">
                         <div class="product-details">
                           <div class="product-name">
-                            <h2><input type="hidden" name="product_id" value="{{$prod->id}}"><a href="{{route('product.show', $prod->id)}}">{{$prod->name}} </a></h2>
+                            <h2><input type="hidden" name="product_id" value="{{$prod->id}}"><a href="{{route('product.show', $prod->slug)}}">{{Str::limit($prod->name, 30)}} </a></h2>
                           </div>
                           <div class="review"></div>
                           <div class="price">
@@ -142,11 +142,11 @@
                     {!!Form::open(['method'=>'POST', 'action'=>'OrderController@store'])!!}
                   <div class="item col-md-4 col-sm-6 col-xs-6">
                     <div class="product-block ">
-                      <div class="image"> <a href="{{route('product.show', $product->id)}}"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="../product_images/{{$product->photo ? $product->photo->product_file : ''}}"></a>
+                      <div class="image"> <a href="{{route('product.show', $product->slug)}}"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="../product_images/{{$product->photo ? $product->photo->product_file : ''}}"></a>
                       </div>
                       <div class="product-details">
                         <div class="product-name">
-                          <h4><input type="hidden" name="product_id" value="{{$product->id}}"><a href="{{route('product.show', $product->id)}}">{{$product->name}}</a></h4>
+                          <h4><input type="hidden" name="product_id" value="{{$product->id}}"><a href="{{route('product.show', $product->slug)}}">{{$product->name}}</a></h4>
                         </div>
                         <div class="price">
                          <input type="hidden" name="total_price" value="{{$product->price}}"><span class="price-new">${{$product->price}}</span> 

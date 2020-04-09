@@ -63,12 +63,12 @@
                   <li>
                     <div class="product-block ">
                       <div class="item col-md-4 col-sm-4 col-xs-4">
-                        <div class="image"> <a href="{{route('product.show', $prod->id)}}"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="/product_images/{{$prod->photo ? $prod->photo->product_file : ''}}"></a> </div>
+                        <div class="image"> <a href="{{route('product.show', $prod->slug)}}"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="/product_images/{{$prod->photo ? $prod->photo->product_file : ''}}"></a> </div>
                       </div>
                       <div class="item col-md-8 col-sm-8 col-xs-8">
                         <div class="product-details">
                           <div class="product-name">
-                            <h5><input type="hidden" name="product_id" value="{{$prod->id}}"><a href="{{route('product.show', $prod->id)}}">{{$prod->name}}</a></h5>
+                            <h5><input type="hidden" name="product_id" value="{{$prod->id}}"><a href="{{route('product.show', $prod->slug)}}">{{Str::limit($prod->name, 30)}}</a></h5>
                           </div>
                           <div class="review"></div>
                           <div class="price">
@@ -147,13 +147,13 @@
                 <li>
                   <div class="product-block ">
                     <div class="item col-md-4 col-sm-6 col-xs-4">
-                      <div class="image"> <a href="{{route('product.show', $product->id)}}"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="/product_images/{{$product->photo ? $product->photo->product_file : ''}}"></a> </div>
+                      <div class="image"> <a href="{{route('product.show', $product->slug)}}"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="/product_images/{{$product->photo ? $product->photo->product_file : ''}}"></a> </div>
                     </div>
                     <div class="item col-md-8 col-sm-6 col-xs-8">
                       <div class="product-details">
                         <div class="product-name">
                            <input type="hidden" name="product_id" value="{{$product->id}}">
-                          <h4><a href="{{route('product.show', $product->id)}}">{{$product->name}}</a></h4>
+                          <h4><a href="{{route('product.show', $product->slug)}}">{{$product->name}}</a></h4>
                         </div>
                         <div class="review"> <span class="rate"> <i class="fa fa-star rated"></i> <i class="fa fa-star rated"></i> <i class="fa fa-star rated"></i> <i class="fa fa-star rated"></i> <i class="fa fa-star"></i> </span> 1 Review(s) | Add Your Review </div>
                         <div class="price"> 
@@ -163,7 +163,7 @@
                           </span> 
                        </div>
                         <div class="product-discription">
-                          <p>{{$product->description}}</p>
+                          <p>{{Str::limit($product->description,250)}}</p>
                         </div>
                         <input type="hidden" name="qty" value="1">
                         <div class="product-hov">

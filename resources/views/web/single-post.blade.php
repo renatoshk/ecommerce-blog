@@ -47,7 +47,7 @@
                   <h4>{{$post->title}}</h4>
                 </div>
                 <div class="description">
-                  <p>{{$post->body}} </p>
+                  <p>{!!$post->body!!} </p>
                   <br>
                   <div class="post-meta">
                     <div class="chat"> <a href="#"> <i class="fa fa-comment"></i> <span class="chat-number">324</span> </a> </div>
@@ -157,12 +157,12 @@
                 <li>
                   <div class="blog-post ">
                     <div class="item col-md-4">
-                      <div class="image"><a href="{{route('blog.edit', $latest_blog->id)}}"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="../../posts_image/{{$latest_blog->photo->file}}"></a> </div>
+                      <div class="image"><a href="{{route('blog.edit', $latest_blog->slug)}}"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="../../posts_image/{{$latest_blog->photo->file}}"></a> </div>
                     </div>
                     <div class="item col-md-8">
                       <div class="blog-details">
                         <div class="blog-name">
-                          <h5><a href="{{route('blog.edit', $latest_blog->id)}}">{{$latest_blog->title}} </a></h5>
+                          <h5><a href="{{route('blog.edit', $latest_blog->slug)}}">{{$latest_blog->title}} </a></h5>
                           <span class="blog-date">{{$latest_blog->created_at ? $latest_blog->created_at->diffForHumans() : ''}}</span> </div>
                       </div>
                     </div>
@@ -171,12 +171,12 @@
                @endforeach
                @endif
               </ul>
-               {{$latest_blogs->links()}}
             </div>
           </div>
           
           <!-- right block end  --> 
         </div>
+               {{$latest_blogs->links()}}
       </div>
     </div>
   </div>

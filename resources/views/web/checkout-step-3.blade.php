@@ -89,9 +89,9 @@
                 @if($orders)
                  @foreach($orders as $order)
                 <tr class="Cartproduct">
-                  <td ><div class="image"><a href="{{route('product.show', $order->product->id)}}"><img alt="img" src="../product_images/{{$order->product->photo->product_file}}"></a></div></td>
+                  <td ><div class="image"><a href="{{route('product.show', $order->product->slug)}}"><img alt="img" src="../product_images/{{$order->product->photo->product_file}}"></a></div></td>
                   <td><div class="product-name">
-                      <h3><a href="{{route('product.show', $order->product->id)}}">{{$order->product->name}} </a></h3>
+                      <h3><a href="{{route('product.show', $order->product->slug)}}">{{$order->product->name}} </a></h3>
                     </div>
                     <span class="size">24 x 2.3 M</span>
                     <div class="price"><span>${{$order->product->price}}</span></div></td>

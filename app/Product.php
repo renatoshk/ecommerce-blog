@@ -1,13 +1,23 @@
 <?php
 
 namespace App;
-
+use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
     protected $fillable = ['name','description','price','image_id','category_id', 'product_review_id', 'qty'];
-    //
+    
+    use Sluggable;
+    use SluggableScopeHelpers;
+    public function sluggable(){
+        return [
+            'slug' => [
+                'source' => 'name',
+            ]
+        ];
+    }
     //lidhja me category
     public function category(){
     	return $this->belongsTo('App\Category');

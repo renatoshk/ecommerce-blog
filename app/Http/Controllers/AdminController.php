@@ -11,6 +11,8 @@ use App\Shipping;
 use App\Payment;
 use App\Post;
 use App\Comment;
+use App\Category;
+use App\PostCategory;
 class AdminController extends Controller
 {
     /**
@@ -30,7 +32,9 @@ class AdminController extends Controller
         $payments = Payment::all();
         $posts = Post::all();
         $comments  = Comment::all();
-        return view('admin_web.dashboard', compact('products_available_count', 'products_unavailable_count', 'cart_orders', 'purchased_orders', 'users', 'users_checkout', 'shippings', 'payments','posts', 'comments'));     
+        $categories = Category::all();
+        $post_categories = PostCategory::all();
+        return view('admin_web.dashboard', compact('products_available_count', 'products_unavailable_count', 'cart_orders', 'purchased_orders', 'users', 'users_checkout', 'shippings', 'payments','posts', 'comments', 'categories', 'post_categories'));     
     }
 
     /**

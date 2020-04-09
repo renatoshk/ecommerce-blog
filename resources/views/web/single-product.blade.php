@@ -63,12 +63,12 @@
                   <li>
                     <div class="product-block ">
                       <div class="item col-md-4 col-sm-4 col-xs-4">
-                        <div class="image"> <a href="{{route('product.show', $product->id)}}"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="/product_images/{{$product->photo ? $product->photo->product_file : ''}}"></a> </div>
+                        <div class="image"> <a href="{{route('product.show', $product->slug)}}"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="/product_images/{{$product->photo ? $product->photo->product_file : ''}}"></a> </div>
                       </div>
                       <div class="item col-md-8 col-sm-8 col-xs-8">
                         <div class="product-details">
                           <div class="product-name">
-                            <h5><input type="hidden" name="product_id" value="{{$product->id}}"><a href="{{route('product.show', $product->id)}}">{{$product->name}}</a></h5>
+                            <h5><input type="hidden" name="product_id" value="{{$product->slug}}"><a href="{{route('product.show', $product->slug)}}">{{Str::limit($product->name,30)}}</a></h5>
                           </div>
 
                           <div class="review"></div>
@@ -99,7 +99,7 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="sp-wrap"> 
-                      <a class="item" href="{{route('product.show', $prods->id)}}">
+                      <a class="item" href="{{route('product.show', $prods->slug)}}">
                         <img style="height: auto; width: auto" src="/product_images/{{$prods->photo ? $prods->photo->product_file : ''}}" alt="">
                       </a> 
                   </div>
@@ -108,7 +108,7 @@
                  {!!Form::open(['method'=>'POST', 'action'=>'OrderController@store'])!!}
                   <div class="product-detail-content">
                     <div class="product-name">
-                      <input type="hidden" name="product_id" value="{{$prods->id}}"><h4><a href="{{route('product.show', $prods->id)}}">{{$prods->name}}</a></h4>
+                      <input type="hidden" name="product_id" value="{{$prods->id}}"><h4><a href="{{route('product.show', $prods->slug)}}">{{$prods->name}}</a></h4>
                     </div>
                     <div class="review"> <span class="rate"> <i class="fa fa-star rated"></i> <i class="fa fa-star rated"></i> <i class="fa fa-star rated"></i> <i class="fa fa-star rated"></i> <i class="fa fa-star"></i> </span> 15 Review(s) | <a href="#">Add Your Review </a> </div>
                     <div class="price">
@@ -116,9 +116,9 @@
                     </div>
                     <div class="stock"><span>In stock : </span>{{$prods->status}}</div>
                     
-                    <div class="product-discription"><span>Description</span>
+                   {{--  <div class="product-discription"><span>Description</span>
                       <p>{{$prods->description}}</p>
-                    </div>
+                    </div> --}}
                   
                     <div class="product-qty">
                     @if(Auth::user())
@@ -180,10 +180,10 @@
                        {!!Form::open(['method'=>'POST', 'action'=>'OrderController@store'])!!}
                     <div class="item">
                       <div class="product-block ">
-                        <div class="image"> <a href="{{route('product.show', $same_cat_prod->id)}}"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="/product_images/{{$same_cat_prod->photo ? $same_cat_prod->photo->product_file : ''}}"></a> </div>
+                        <div class="image"> <a href="{{route('product.show', $same_cat_prod->slug)}}"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="/product_images/{{$same_cat_prod->photo ? $same_cat_prod->photo->product_file : ''}}"></a> </div>
                         <div class="product-details">
                           <div class="product-name">
-                            <h4><input type="hidden" name="product_id" value="{{$same_cat_prod->id}}"><a href="{{route('product.show', $same_cat_prod->id)}}">{{$same_cat_prod->name}}</a></h4>
+                            <h4><input type="hidden" name="product_id" value="{{$same_cat_prod->id}}"><a href="{{route('product.show', $same_cat_prod->slug)}}">{{$same_cat_prod->name}}</a></h4>
                           </div>
                           <input type="hidden" name="total_price" value="{{$same_cat_prod->price}}"><div class="price"><span class="price-new">${{$same_cat_prod->price}}</span> </div>
                           <input type="hidden" name="qty" value="1">

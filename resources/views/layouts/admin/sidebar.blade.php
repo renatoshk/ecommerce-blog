@@ -10,11 +10,11 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="/images/{{Auth::user()->photo->user_register_file}}" class="img-circle elevation-2" alt="User Image">
+                <img src="/images/{{Auth::user()->photo ? Auth::user()->photo->user_register_file : ''}}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
                 {{-- vendos emrin e userit nga session --}}
-                <a href="#" class="d-block">{{Auth::user()->username}}</a>
+                <h4 style="color: white;" class="d-block">{{Auth::user()->username}}</h4>
             </div>
         </div>
         <!-- Sidebar Menu -->

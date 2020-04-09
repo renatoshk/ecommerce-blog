@@ -62,9 +62,9 @@
                 @foreach($orders as $order)
                 {!!Form::model($order, ['method'=>'PATCH', 'action'=>['OrderController@update', $order->id]])!!}
                 <tr class="Cartproduct">
-                  <td ><div class="image"><a href="{{route('product.show', $order->product->id)}}"><img alt="img" src="../product_images/{{$order->product->photo->product_file}}"></a></div></td>
+                  <td ><div class="image"><a href="{{route('product.show', $order->product->slug)}}"><img alt="img" src="../product_images/{{$order->product->photo->product_file}}"></a></div></td>
                   <td><div class="product-name">
-                      <h4><a href="{{route('product.show', $order->product->id)}}">{{$order->product->name}}</a></h4>
+                      <h4><a href="{{route('product.show', $order->product->slug)}}">{{$order->product->name}}</a></h4>
                     </div>
                     <span class="size">24 x 2.3 M</span>
                     <div class="price"><span>${{$order->total_price}}</span></div></td>

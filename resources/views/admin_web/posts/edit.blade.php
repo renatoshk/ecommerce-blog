@@ -1,5 +1,6 @@
 @extends('layouts.admin.index')
 @section('content')
+@include('includes.tinyeditor')
 <div class="content-wrapper" style="min-height: 1200.88px;">
     <!-- Content Header (Page header) -->
     <section class="content-header">

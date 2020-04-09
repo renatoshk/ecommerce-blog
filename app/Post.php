@@ -1,15 +1,24 @@
 <?php
 
 namespace App;
-
+use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
     //
-    protected $fillable = ['title', 'body', 'category_id', 'photo_id'];
-    
 
+    protected $fillable = ['title', 'body', 'category_id', 'photo_id'];
+    use Sluggable;
+    use SluggableScopeHelpers;
+     public function sluggable(){
+        return [
+            'slug' => [
+                'source' => 'title',
+            ]
+        ];
+    }
     //lidhja me categories
     public function category(){
     	return $this->belongsTo('App\PostCategory');

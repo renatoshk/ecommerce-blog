@@ -113,7 +113,7 @@
                       </div>
                     </div>
                      <div class="pull-right">
-                         <input type="submit" name="submit" value="Continue to Order" class="form-control btn btn-primary">
+                         <input type="submit" name="submit" value="Finish your order" class="form-control btn btn-primary">
 
                      </div>
                   </div>

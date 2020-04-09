@@ -25,6 +25,8 @@ class EditPostRequest extends FormRequest
     {
         return [
             //
+            'title'=>'required',
+            'body'=>'required'
         ];
     }
 }

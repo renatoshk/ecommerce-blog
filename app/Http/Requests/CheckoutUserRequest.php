@@ -25,6 +25,14 @@ class CheckoutUserRequest extends FormRequest
     {
         return [
             //
+            'name'=>'required',
+            'surname'=>'required',
+            'email'=>'required',
+            'address'=>'required',
+            'country'=>'required',
+            'city'=>'required',
+            'zip_code'=>'required',
+            'phone_number'=>'required'
         ];
     }
 }

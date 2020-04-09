@@ -71,7 +71,7 @@
       <td>{{$product->user ? $product->user->username : 'No user'}}</td>
       <td><img height="50px" src="../product_images/{{$product->photo ? $product->photo->product_file : 'No Photo'}}" alt="">
       </td>
-      <td><a style="color: black" href="{{route('products.edit', $product->id)}}">{{$product->name}}</a></td>
+      <td><a style="color: black" href="{{route('products.edit', $product->id)}}">{{Str::limit($product->name,30)}}</a></td>
       <td>{{$product->price}}</td>
       <td>{{$product->qty}}</td>
       <td>{{$product->status}}</td>

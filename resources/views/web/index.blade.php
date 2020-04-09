@@ -14,8 +14,8 @@
                       @if($orders)
                        @foreach($orders as $order)
                       <tr>
-                        <td class="text-center"><a href="{{route('product.show', $order->product->id)}}"><img class="img-thumbnail" src="/product_images/{{$order->product->photo->product_file}}" alt="img"></a></td>
-                        <td class="text-left"><a href="{{route('product.show', $order->product->id)}}">{{$order->product->name}}</a></td>
+                        <td class="text-center"><a href="{{route('product.show', $order->product->slug)}}"><img class="img-thumbnail" src="/product_images/{{$order->product->photo->product_file}}" alt="img"></a></td>
+                        <td class="text-left"><a href="{{route('product.show', $order->product->slug)}}">{{$order->product->name}}</a></td>
                         <td class="text-right quality">X1</td>
                         <td class="text-right price-new">${{$order->total_price}}</td>
                       </tr>
@@ -93,108 +93,7 @@
   </div>
   <!-- Main Banner End --> 
   <!-- Fashio Sale block Start  -->
-  <div id="fashion-sale">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 fashion">
-          <div class="box">
-            <div id="fashion-product" class="owl-carousel fashion-product">
-              <div class="item">
-                <div class="product-block ">
-                  <div class="image"> <a href="#"><img class="img-responsive" title="pursh" alt="pursh" src="frontend/images/product/pro1.png"></a> </div>
-                  <div class="product-details">
-                    <div class="product-name">
-                      <h3><a href="#">Cosmetics</a></h3>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="product-block ">
-                  <div class="image"> <a href="#"><img class="img-responsive" title="sandle" alt="sandal" src="frontend/images/product/pro2.png"></a> </div>
-                  <div class="product-details">
-                    <div class="product-name">
-                      <h3><a href="#">Jewelry</a></h3>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="product-block ">
-                  <div class="image"> <a href="#"><img class="img-responsive" title="jeans" alt="jeans" src="frontend/images/product/pro3.png"></a> </div>
-                  <div class="product-details">
-                    <div class="product-name">
-                      <h3><a href="#">Smart TV </a></h3>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="product-block ">
-                  <div class="image"> <a href="#"><img class="img-responsive" title="jeans" alt="jeans" src="frontend/images/product/pro4.png"></a> </div>
-                  <div class="product-details">
-                    <div class="product-name">
-                      <h3><a href="#">Tech</a></h3>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="product-block ">
-                  <div class="image"> <a href="#"><img class="img-responsive" title="jeans" alt="jeans" src="frontend/images/product/pro5.png"></a> </div>
-                  <div class="product-details">
-                    <div class="product-name">
-                      <h3><a href="#">Handbags</a></h3>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="product-block ">
-                  <div class="image"> <a href="#"><img class="img-responsive" title="jeans" alt="jeans" src="frontend/images/product/pro6.png"></a> </div>
-                  <div class="product-details">
-                    <div class="product-name">
-                      <h3><a href="#">Electronics</a></h3>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="product-block ">
-                  <div class="image"> <a href="#"><img class="img-responsive" title="pursh" alt="pursh" src="frontend/images/product/pro7.png"></a> </div>
-                  <div class="product-details">
-                    <div class="product-name">
-                      <h3><a href="#">Fashion</a></h3>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="product-block ">
-                  <div class="image"> <a href="#"><img class="img-responsive" title="sandle" alt="sandal" src="frontend/images/product/pro4.png"></a> </div>
-                  <div class="product-details">
-                    <div class="product-name">
-                      <h3><a href="#">Cellphones </a></h3>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="product-block ">
-                  <div class="image"> <a href="#"><img class="img-responsive" title="jeans" alt="jeans" src="frontend/images/product/pro5.png"></a> </div>
-                  <div class="product-details">
-                    <div class="product-name">
-                      <h3><a href="#">Handbags</a></h3>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+
   <!-- Fashio Sale block End  --> 
   
   <!-- 3 CMS Block Start -->
@@ -204,14 +103,14 @@
         <div class="col-md-12">
           <div class= "cms-block1 col-sm-4 col-sm-12">
             <div class="stf">FREE SHIPPING & RETURN*</div>
-            <p>For all orders over $500</p>
+            <p>For all orders over $100</p>
           </div>
           <div class= "cms-block2 col-sm-4 col-sm-12">
             <div class="stf">MONEY BACK GUARANTEE</div>
             <p>Return Over 30 Days</p>
           </div>
           <div class= "cms-block3 col-sm-4 col-sm-12">
-            <div class="stf">25% ON STUDENT DISCOUNT</div>
+            <div class="stf"> STUDENT DISCOUNT</div>
             <p>Excludes Sale In Store</p>
           </div>
         </div>
@@ -236,10 +135,10 @@
               {!!Form::open(['method'=>'POST', 'action'=>'OrderController@store'])!!}
               <div class="item">
                 <div class="product-block ">
-                  <div class="image"> <a href="{{route('product.show', $product->id)}}"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="../product_images/{{$product->photo ? $product->photo->product_file : 'No Photo'}}"></a> </div>
+                  <div class="image"> <a href="{{route('product.show', $product->slug)}}"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="../product_images/{{$product->photo ? $product->photo->product_file : 'No Photo'}}"></a> </div>
                   <div class="product-details">
                     <div class="product-name">
-                      <input type="hidden" name="product_id" value="{{$product->id}}"><h3><a href="{{route('product.show', $product->id)}}">{{$product->name}}</a></h3>
+                      <input type="hidden" name="product_id" value="{{$product->id}}"><h3><a href="{{route('product.show', $product->slug)}}">{{$product->name}}</a></h3>
                     </div>
                     <div class="price"> 
                          <input type="hidden" name="total_price" value="{{$product->price}}"> <span class="price-new">${{$product->price}}</span> 
@@ -307,55 +206,33 @@
           <div class="Latest-News-title">
             <h2 class="tf">Latest Blog!<span> From newest items </span></h2>
           </div>
-          <div class= "customNavigation"> <a class="btn Latest_prev prev"><i class="fa fa-angle-left"></i></a> <a class="btn Latest_next next"><i class="fa fa-angle-right"></i></a> </div>
+          <div class= "customNavigation"> <a class="btn Latest_prev prev"><i class="fa fa-angle-left"></i></a> <a class="btn Latest_next next"><i class="fa fa-angle-right"></i></a> 
+          </div>
           <div id="Latest-News" class="owl-carousel ">
             @if($posts)
              @foreach($posts as $post)
             <div class="item">
               <div class="post">
-                <div class="image"> <a href="{{route('blog.edit', $post->id)}}"><img src="../posts_image/{{$post->photo->file}}" alt="post" title="post" class="img-responsive"></a> </div>
+                <div class="image"> <a href="{{route('blog.edit', $post->slug)}}"><img src="../posts_image/{{$post->photo->file}}" alt="post" title="post" class="img-responsive"></a> </div>
                 <div class="content-details">
                   <div class="post-title">
-                    <h3><a href="{{route('blog.edit', $post->id)}}">{{$post->title}}</a></h3>
+                    <h3><a href="{{route('blog.edit', $post->slug)}}">{{$post->title}}</a></h3>
                   </div>
                   <div class="description">
-                    <p>{{ \Illuminate\Support\Str::limit($post->body, 500) }}</p>
-                    <div class="read-more"> <a class="read-more" href="{{route('blog.edit', $post->id)}}">Read More..</a> </div>
+                    <p>{!! \Illuminate\Support\Str::limit($post->body, 100) !!}</p>
+                    <div class="read-more"> <a class="read-more" href="{{route('blog.edit', $post->slug)}}">Read More..</a> </div>
                   </div>
                 </div>
               </div>
             </div>
-           @endforeach
+          @endforeach
            @endif
           </div>
         </div>
-        <div class="col-md-3 special">
-          <div class="Special-title">
-            <h2 class="tf">Best<samp> Offers</samp></h2>
-          </div>
-          <div class= "customNavigation"> <a class="special_prev"><i class="fa fa-angle-left"></i></a>
-            <div id="owlStatus">
-              <div class="currentItem">
-                <div class="result"></div>
-              </div>
-              /
-              <div class="owlItems">
-                <div class="result"></div>
-              </div>
-            </div>
-            <a class="special_next"><i class="fa fa-angle-right"></i></a> </div>
-          <div class="Special-product">
-            <div id="special" class="owl-carousel">
-              <div class="item"><a href="#"><img src="frontend/images/special-banner.jpg" alt="#"></a> </div>
-              <div class="item"><a href="#"><img src="frontend/images/special-banner2.jpg" alt="#"></a></div>
-              <div class="item"><a href="#"><img src="frontend/images/special-banner3.jpg" alt="#"></a></div>
-              <div class="item"><a href="#"><img src="frontend/images/special-banner4.jpg" alt="#"></a></div>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
   </div>
+
   <!-- Latest News block End  --> 
   
   <!-- Brand logo block Start  -->
@@ -379,4 +256,5 @@
       </div>
     </div>
   </div>
+
   @stop

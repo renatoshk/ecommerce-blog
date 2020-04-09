@@ -25,6 +25,10 @@ class CurrencyRequest extends FormRequest
     {
         return [
             //
+            'currency_name'=>'required',
+            'currency_code'=>'required',
+            'currency_symbol'=>'required',
+            'is_base_currency'=>'required'
         ];
     }
 }

@@ -86,7 +86,6 @@ body {
 				<thead>
 			        <tr>
 			          <th scope="col">Product</th>
-			          <th scope="col">Status</th>
 			          <th scope="col">Quantity</th>
 			          <th scope="col">Total Price</th>
 			         
@@ -97,7 +96,6 @@ body {
 				    @foreach($orders as $order)	
 				    <tr>
 				      <td>{{$order->product ? $order->product->name : 'Uncategorized'}}</td>
-				      <td>{{$order->status}}</td>
 				      <td>{{$order->qty}}</td>
 				      <td>${{$order->total_price}}</td>
 				    </tr>

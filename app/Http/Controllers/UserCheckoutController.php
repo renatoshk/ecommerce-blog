@@ -22,6 +22,7 @@ class UserCheckoutController extends Controller
           return view('web.checkout-step-1');
         }
         else {
+            Session::flash('flash_message', 'You need to login to buy Products'); 
             return redirect('/');
         }
     }

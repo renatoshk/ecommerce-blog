@@ -48,15 +48,15 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
         //
 
-        $products = Product::orderBy('created_at', 'DESC')->take(3)->get();
+        $products = Product::orderBy('created_at', 'DESC')->where('status', 'available')->take(3)->get();
         $categories = Category::all();
 
-        $prods = Product::findOrFail($id);
-        $same_cats_prods = Product::orderBy('created_at', 'DESC')->where('category_id',$prods->category->id)->where('id', '!=',$id)->get();
+        $prods = Product::findBySlugOrFail($slug);
+        $same_cats_prods = Product::orderBy('created_at', 'DESC')->where('status', 'available')->where('category_id',$prods->category->id)->where('slug', '!=',$slug)->get();
         return view('web.single-product', compact('products', 'categories', 'prods', 'same_cats_prods'));
     }
 

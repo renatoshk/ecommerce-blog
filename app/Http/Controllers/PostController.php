@@ -19,7 +19,7 @@ class PostController extends Controller
         //
          $posts = Post::orderBy('created_at')->paginate(3);
          $categories = PostCategory::all();
-         $latest_blogs = Post::orderBy('created_at')->paginate(3);
+         $latest_blogs = Post::orderBy('created_at')->take(3)->get();
          return view('web.blog', compact('posts', 'categories', 'latest_blogs'));
     }
 
@@ -61,20 +61,19 @@ class PostController extends Controller
         return view('web.blog', compact('categories', 'posts', 'latest_blogs'));
     }
 
-    /**
+ /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
         //
-        $post = Post::findOrFail($id);
+        $post = Post::findBySlugOrFail($slug);
         $categories = PostCategory::all();
         $latest_blogs = Post::orderBy('created_at')->paginate(3);
         $comments = $post->comments()->whereisActive(1)->orderBy('created_at', 'DESC')->get();
-        
         return  view('web.single-post',  compact('post', 'categories', 'latest_blogs', 'comments'));
     }
  

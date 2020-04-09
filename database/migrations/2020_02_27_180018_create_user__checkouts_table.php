@@ -25,7 +25,7 @@ class CreateUserCheckoutsTable extends Migration
             $table->string('city');
             $table->integer('zip_code');
             $table->integer('phone_number');
-            $table->string('additional_information');
+            $table->string('additional_information')->nullable();
             $table->timestamps();
             
         });

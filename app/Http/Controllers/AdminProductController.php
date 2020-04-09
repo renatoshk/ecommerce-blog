@@ -118,6 +118,7 @@ class AdminProductController extends Controller
     {
         //
         $product = Product::findOrFail($id);
+        unlink(public_path() . '/product_images/' .$product->photo->product_file);
         $product->delete();
         Session::flash('flash_message', 'The Product has been deleted!');
         return redirect()->back();

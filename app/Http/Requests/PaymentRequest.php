@@ -25,6 +25,10 @@ class PaymentRequest extends FormRequest
     {
         return [
             //
+            'credit_card_name'=>'required',
+            'credit_card_number'=>'required',
+            'expiration'=>'required',
+            'verification_number'=>'required'
         ];
     }
 }

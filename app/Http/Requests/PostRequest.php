@@ -25,6 +25,9 @@ class PostRequest extends FormRequest
     {
         return [
             //
+            'title'=>'required',
+            'body'=>'required',
+            'photo_id'=>'required'
         ];
     }
 }

@@ -25,6 +25,12 @@ class ProductRequest extends FormRequest
     {
         return [
             //
+            'image_id'=>'required',
+            'name'=>'required',
+            'description'=>'required',
+            'price'=>'required',
+            'qty'=>'required'
+
         ];
     }
 }

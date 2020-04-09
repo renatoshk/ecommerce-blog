@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PaymentRequest;
 use App\Order;
- use Illuminate\Support\Facades\Session;
+use App\Product;
+use Illuminate\Support\Facades\Session;
 class PaymentController extends Controller
 {
     /**
@@ -53,6 +54,18 @@ class PaymentController extends Controller
            $orders_status = Order::where('status', 'none')->where('user_id', $user->id)->get();
           if(count($orders) > 0){
             $input = $request->all();
+            foreach ($orders_status as $order_status) {
+                  $new_qty = $order_status->product->qty - $order_status['qty'];
+
+                  if($new_qty > 0){
+                    
+                    Product::where('id', $order_status->product->id)->update(['qty'=> $new_qty]);
+                  }
+                  else {
+                    Product::where('id', $order_status->product->id)->update(['status'=>'unavailable', 'qty'=>$new_qty]);
+                  }  
+            }
+             
             $input['order_id'] = implode(',', $orders);
             $user->orders()->update(['status'=>'purchase']);
             $user->payments()->create($input);

@@ -25,6 +25,9 @@ class ShippingRequest extends FormRequest
     {
         return [
             //
+            'shipping_id'=>'required',
+            'address'=>'required',
+            'zip_code'=>'required'
         ];
     }
 }
