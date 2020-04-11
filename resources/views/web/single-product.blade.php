@@ -63,7 +63,7 @@
                   <li>
                     <div class="product-block ">
                       <div class="item col-md-4 col-sm-4 col-xs-4">
-                        <div class="image"> <a href="{{route('product.show', $product->slug)}}"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="/product_images/{{$product->photo ? $product->photo->product_file : ''}}"></a> </div>
+                        <div class="image"> <a href="{{route('product.show', $product->slug)}}"><img class="img-responsive" title="{{$product->slug}}" alt="T-shirt" src="/product_images/{{$product->photo ? $product->photo->product_file : ''}}"></a> </div>
                       </div>
                       <div class="item col-md-8 col-sm-8 col-xs-8">
                         <div class="product-details">
@@ -180,7 +180,7 @@
                        {!!Form::open(['method'=>'POST', 'action'=>'OrderController@store'])!!}
                     <div class="item">
                       <div class="product-block ">
-                        <div class="image"> <a href="{{route('product.show', $same_cat_prod->slug)}}"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="/product_images/{{$same_cat_prod->photo ? $same_cat_prod->photo->product_file : ''}}"></a> </div>
+                        <div class="image"> <a href="{{route('product.show', $same_cat_prod->slug)}}"><img class="img-responsive" title="{{$same_cat_prod->slug}}" alt="T-shirt" src="/product_images/{{$same_cat_prod->photo ? $same_cat_prod->photo->product_file : ''}}"></a> </div>
                         <div class="product-details">
                           <div class="product-name">
                             <h4><input type="hidden" name="product_id" value="{{$same_cat_prod->id}}"><a href="{{route('product.show', $same_cat_prod->slug)}}">{{$same_cat_prod->name}}</a></h4>

@@ -20,7 +20,7 @@ class CategoriesController extends Controller
     {
         $categories = Category::all();
         $products = Product::where('status', 'available')->get();
-        $posts = Post::orderBy('created_at')->take(3)->get();
+        $posts = Post::orderBy('created_at')->take(2)->get();
         $user = Auth::user();
         $total_price = 0;
         $orders_count = 0;

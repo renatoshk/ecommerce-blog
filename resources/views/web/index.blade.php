@@ -68,6 +68,7 @@
               @endforeach
             @endif
              <li><a href="{{route('blog.index')}}">Blog</a></li>
+             <li><a href="{{route('blog.index')}}">About Us</a></li>
           </ul>
         </div>
       </nav>
@@ -135,7 +136,7 @@
               {!!Form::open(['method'=>'POST', 'action'=>'OrderController@store'])!!}
               <div class="item">
                 <div class="product-block ">
-                  <div class="image"> <a href="{{route('product.show', $product->slug)}}"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="../product_images/{{$product->photo ? $product->photo->product_file : 'No Photo'}}"></a> </div>
+                  <div class="image"> <a href="{{route('product.show', $product->slug)}}"><img class="img-responsive" title="{{$product->slug}}" alt="T-shirt" src="../product_images/{{$product->photo ? $product->photo->product_file : 'No Photo'}}"></a> </div>
                   <div class="product-details">
                     <div class="product-name">
                       <input type="hidden" name="product_id" value="{{$product->id}}"><h3><a href="{{route('product.show', $product->slug)}}">{{$product->name}}</a></h3>
@@ -187,7 +188,7 @@
         <!-- video start -->
         <div class="col-md-8 video">
           <video controls>
-            <source src="frontend/video/Fashion_Film.mp4" type="video/mp4">
+            <source src="frontend/video/video.mkv" type="video/mp4">
             <source src="mov_bbb.ogg" type="video/ogg">
           </video>
         </div>

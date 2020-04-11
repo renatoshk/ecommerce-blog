@@ -19,6 +19,7 @@ class CreateShippingsTable extends Migration
             $table->string('order_id');
             $table->integer('shipping_id');
             $table->string('address');
+            $table->string('country');
             $table->integer('zip_code');
             $table->timestamps();
             //$table->foreign('user_id')->references('id')->on('user_checkouts')->onDelete('cascade');

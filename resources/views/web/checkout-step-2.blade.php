@@ -83,6 +83,7 @@
               <label for="id_country">Country</label>
               <select name="country" id="id_country" aria-required="true" class="form-control select2-hidden-accessible" tabindex="-1" aria-hidden="true">
                 <option value="">Choose</option>
+                <option value="37">Albania</option>
                 <option value="38">Algeria</option>
                 <option value="39">American Samoa</option>
                 <option value="40">Andorra</option>

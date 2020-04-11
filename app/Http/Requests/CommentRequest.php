@@ -25,8 +25,7 @@ class CommentRequest extends FormRequest
     {
         return [
             //
-            'author'=>'required',
-            'text'=>'required'
+          
         ];
     }
 }

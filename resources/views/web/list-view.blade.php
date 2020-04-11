@@ -63,7 +63,7 @@
                   <li>
                     <div class="product-block ">
                       <div class="item col-md-4 col-sm-4 col-xs-4">
-                        <div class="image"> <a href="{{route('product.show', $prod->slug)}}"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="/product_images/{{$prod->photo ? $prod->photo->product_file : ''}}"></a> </div>
+                        <div class="image"> <a href="{{route('product.show', $prod->slug)}}"><img class="img-responsive" title="T-shirt" alt="{{$prod->slug}}" src="/product_images/{{$prod->photo ? $prod->photo->product_file : ''}}"></a> </div>
                       </div>
                       <div class="item col-md-8 col-sm-8 col-xs-8">
                         <div class="product-details">
@@ -147,7 +147,7 @@
                 <li>
                   <div class="product-block ">
                     <div class="item col-md-4 col-sm-6 col-xs-4">
-                      <div class="image"> <a href="{{route('product.show', $product->slug)}}"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="/product_images/{{$product->photo ? $product->photo->product_file : ''}}"></a> </div>
+                      <div class="image"> <a href="{{route('product.show', $product->slug)}}"><img class="img-responsive" title="{{$product->slug}}" alt="T-shirt" src="/product_images/{{$product->photo ? $product->photo->product_file : ''}}"></a> </div>
                     </div>
                     <div class="item col-md-8 col-sm-6 col-xs-8">
                       <div class="product-details">
