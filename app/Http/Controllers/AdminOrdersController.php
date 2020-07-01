@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Order;
 use App\Post;
 use App\User;
-
+ 
 class AdminOrdersController extends Controller
 {
     /**

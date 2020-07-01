@@ -16,15 +16,15 @@
       <div class="row">
         <div class="col-md-3">
           <div class="page-title">
-            <h4>About</h4>
+            <h4>About Us</h4>
           </div>
         </div>
         <div class="col-md-9">
           <div class="bread-crumb">
             <ul>
-              <li><a href="http://localhost/blog/public/index.php">home</a></li>
+              <li><a href="/">home</a></li>
               <li>\</li>
-              <li><a href="about-us.html">about us</a></li>
+              <li><a href="/about_us">about us</a></li>
             </ul>
           </div>
         </div>
@@ -38,9 +38,13 @@
       <div class="row">
         <div class="col-md-12">
           <div class="row">
-            <div class="col-md-4 col-sm-4 photos"> <img class="img-responsive" src="images/b1.jpg" alt="#"> </div>
-            <div class="col-md-4 col-sm-4 photos"> <img class="img-responsive" src="images/b1.jpg" alt="#"> </div>
-            <div class="col-md-4 col-sm-4 photos"> <img class="img-responsive" src="images/b1.jpg" alt="#"> </div>
+            <div class="col-md-4 col-sm-4 photos"> <img class="img-responsive" src="images/ervin.jpg" alt="#"><br>  
+              <h3>Ervin Shkulaku</h3>
+            </div>
+            <div class="col-md-4 col-sm-4 photos"> <img class="img-responsive" src="images/anxhel.jpg" alt="#"><br>  
+              <h3>Anxhel Shkulaku</h3></div>
+            <div class="col-md-4 col-sm-4 photos"> <img class="img-responsive" src="images/renato.jpg" alt="#"><br>  
+              <h3>Renato Shkulaku</h3> </div>
           </div>
         </div>
       </div>

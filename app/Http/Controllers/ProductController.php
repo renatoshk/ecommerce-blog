@@ -49,8 +49,8 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($slug)
-    {
-        //
+    { 
+        // 
 
         $products = Product::orderBy('created_at', 'DESC')->where('status', 'available')->take(3)->get();
         $categories = Category::all();

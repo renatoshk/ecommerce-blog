@@ -68,7 +68,7 @@
               @endforeach
             @endif
              <li><a href="{{route('blog.index')}}">Blog</a></li>
-             <li><a href="{{route('blog.index')}}">About Us</a></li>
+             <li><a href="/about_us">About Us</a></li>
           </ul>
         </div>
       </nav>

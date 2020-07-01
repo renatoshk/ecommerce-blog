@@ -94,7 +94,7 @@ class AdminProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(EditProductRequest $request, $id)
-    {
+    { 
        
        $input = $request->all();
         if($file = $request->file('image_id')){

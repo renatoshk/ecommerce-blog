@@ -48,7 +48,7 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         //
-        $user = Auth::user();
+        $user = Auth::user(); 
      if($user){
                 $input = $request->all();
                 $qty = $input['qty'];

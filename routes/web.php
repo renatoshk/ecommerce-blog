@@ -47,7 +47,7 @@ Route::resource('/adm/shipping', 'AdminShippingController');
 Route::resource('/adm/payments', 'AdminPaymentsController');
 });
 
-Auth::routes();
+Auth::routes(['verify'=>true]);
 Route::resource('/profile', 'ProfileController');
 Route::resource('/change_password', 'ChangePasswordUsersController');
 Route::resource('/', 'CategoriesController');
@@ -57,7 +57,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::resource('/product', 'ProductController');
 Route::resource('/orders', 'OrderController');
-Route::get('/cart', 'OrderController@cart')->name('cart');
+Route::get('/cart', 'OrderController@cart')->name('cart'); 
 Route::resource('checkout-step-1', 'UserCheckoutController');
 Route::resource('checkout-step-2', 'ShippingController');
 Route::resource('checkout-step-4', 'PaymentController');

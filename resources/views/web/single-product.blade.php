@@ -1,4 +1,4 @@
-@extends('layouts.webi.index')
+ @extends('layouts.webi.index')
 @section ('content')
   <!-- offer block Start  -->
   <div id="offer">
@@ -14,7 +14,7 @@
   <div id="bread-crumb">
     <div class="container">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3"> 
           <div class="page-title">
             <h4>{{$prods->category->name ? $prods->category->name : '' }}</h4>
           </div>
