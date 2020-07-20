@@ -53,7 +53,7 @@ class OrderController extends Controller
                 $input = $request->all();
                 $prod_qty = $input['prod_qty'];
                 $qty = $input['qty'];
-            if($qty <= $prod_qty){
+            if($qty <= $prod_qty && $qty >= 1){ 
                 $price = $input['total_price'];
                 $price = $price * $qty;
                 $input['total_price'] = $price;
@@ -61,6 +61,7 @@ class OrderController extends Controller
                 Session::flash('flash_message', 'The product is in your shopping cart !');
                 return redirect('/cart');
               }
+
              else {
                Session::flash('flash_message', 'This quantity is not available for this product!');
                 return redirect()->back();
