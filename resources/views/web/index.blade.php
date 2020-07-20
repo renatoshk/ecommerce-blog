@@ -1,7 +1,5 @@
 @extends('layouts.webi.index')
-
 @section('header_cart')
-
 <div class="col-md-3 header-right">
             <div class="cart">
               

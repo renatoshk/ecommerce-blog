@@ -49,15 +49,22 @@ class OrderController extends Controller
     {
         //
         $user = Auth::user(); 
-     if($user){
+     if($user){ 
                 $input = $request->all();
+                $prod_qty = $input['prod_qty'];
                 $qty = $input['qty'];
+            if($qty <= $prod_qty){
                 $price = $input['total_price'];
                 $price = $price * $qty;
                 $input['total_price'] = $price;
-                $user->orders()->create($input);
+                $user->orders()->create($input); 
                 Session::flash('flash_message', 'The product is in your shopping cart !');
                 return redirect('/cart');
+              }
+             else {
+               Session::flash('flash_message', 'This quantity is not available for this product!');
+                return redirect()->back();
+             }  
             }
          else {
                Session::flash('flash_message', 'You need to login to continue shopping!');
@@ -98,8 +105,6 @@ class OrderController extends Controller
     {
         //
        $user = Auth::user();
-
-
        if($user){
        $orders =Order::orderBy('created_at')->where('status', 'none')->where('user_id', $user->id)->where('id', $id)->get();
          foreach ($orders as $order) {
@@ -126,7 +131,7 @@ class OrderController extends Controller
        return redirect()->back();
     }
     //show orders at cart
-    public function cart(){
+     public function cart(){
         $user = Auth::user();
         if($user){
         $orders = Order::orderBy('created_at')->where('user_id', $user->id)->where('status', 'none')->paginate(3);    
@@ -153,8 +158,6 @@ class OrderController extends Controller
               $shippings = Shipping::where('user_id', $user->id)->where('order_id', $orderss)->get();
              //cmimi total i te gjithe produkteve qe po bejm checkout
               $total_price = Order::orderBy('created_at')->where('user_id', $user->id)->where('status', 'none')->sum('total_price');
-
-          
 
               return view('web.checkout-step-3', compact('orders', 'total_price', 'shippings'));
            }

@@ -17,7 +17,7 @@ class ShippingController extends Controller
      */
     public function index()
     {
-        //
+        // 
        $shipping_methods = Shipping_method::all(); 
        return view('web.checkout-step-2', compact('shipping_methods'));
     }

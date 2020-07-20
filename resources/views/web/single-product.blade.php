@@ -9,6 +9,13 @@
     </div>
   </div>
   <!-- offer block end  --> 
+  <br>
+@if ( Session::has('flash_message') )
+  <div class="alert {{ Session::get('flash_type', 'alert-danger') }}">
+      <h3>{{ Session::get('flash_message') }}</h3>
+  </div>
+@endif
+<br>
   
   <!-- bredcrumb and page title block start  -->
   <div id="bread-crumb">
@@ -115,11 +122,7 @@
                       <input type="hidden" name="total_price" value ={{$prods->price}}><span class="price-new">${{$prods->price}}</span> 
                     </div>
                     <div class="stock"><span>In stock : </span>{{$prods->status}}</div>
-                    
-                   {{--  <div class="product-discription"><span>Description</span>
-                      <p>{{$prods->description}}</p>
-                    </div> --}}
-                  
+                    <input type="hidden" name="prod_qty" value="{{$prods->qty}}">
                     <div class="product-qty">
                     @if(Auth::user())
                       <label for="qty">Qty:</label>

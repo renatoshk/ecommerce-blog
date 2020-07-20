@@ -70,7 +70,8 @@
                     <div class="price"><span>${{$order->total_price}}</span></div></td>
                   <td class="product-quantity"><div class="quantity">
                       <input type="number" size="4" class="input-text qty text" title="Qty" value="{{$order->qty}}" name="qty" min="1" max="{{$order->product->qty}}" step="1">
-                    </div></td>
+                    </div>
+                  </td>
                   <td>0</td>
                   <input type="hidden" name="total_price" value="{{$order->total_price}}"><td class="price">${{$order->total_price}}</td>
                   <td>
